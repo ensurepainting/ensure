@@ -1,0 +1,1163 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ENSURE Painting & Decorating | Commercial & Architectural Painters Sydney</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        gold: {
+                            400: '#F5C842',
+                            500: '#F2B705',
+                            600: '#D99B04',
+                            700: '#B37D03'
+                        },
+                        charcoal: {
+                            900: '#0D0E10',
+                            800: '#141619',
+                            700: '#1F2226',
+                            600: '#2A2E35'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0D0E10;
+            color: #E2E8F0;
+            overflow-x: hidden;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0D0E10;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2A2E35;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #F2B705;
+        }
+        /* Glassmorphism */
+        .glass-panel {
+            background: rgba(20, 22, 25, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .glass-card {
+            background: rgba(31, 34, 38, 0.6);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(242, 183, 5, 0.15);
+        }
+        .glass-card:hover {
+            border-color: rgba(242, 183, 5, 0.4);
+            box-shadow: 0 10px 30px -10px rgba(242, 183, 5, 0.15);
+        }
+        /* Image Blend Utility for Black Logos */
+        .blend-screen {
+            mix-blend-mode: screen;
+        }
+    </style>
+</head>
+<body class="bg-charcoal-900 text-slate-200 antialiased selection:bg-gold-500 selection:text-charcoal-900">
+
+    <!-- HEADER & NAVIGATION -->
+    <header class="fixed top-0 left-0 right-0 z-40 glass-panel border-b border-white/10 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                
+                <!-- Logo & Edit Logo Container -->
+                <div class="flex items-center gap-3 sm:gap-4">
+                    <a href="#home" id="header-logo-container" class="flex items-center group transition-transform duration-200 hover:scale-[1.01]">
+                        <!-- Dynamic Logo Rendered by JS -->
+                    </a>
+                    
+                    <!-- EDIT LOGO BUTTON -->
+                    <button onclick="openLogoModal()" class="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-semibold rounded-md bg-gold-500/10 text-gold-400 border border-gold-500/30 hover:bg-gold-500/20 hover:border-gold-500 transition-all shadow-sm">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
+                        <span>Edit Logo</span>
+                    </button>
+                </div>
+
+                <!-- Desktop Nav Navigation -->
+                <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
+                    <a href="#home" class="text-white hover:text-gold-400 transition-colors">Home</a>
+                    <a href="#about" class="text-slate-300 hover:text-gold-400 transition-colors">About Us</a>
+                    <a href="#visualizer" class="text-slate-300 hover:text-gold-400 transition-colors">Finish Visualizer</a>
+                    <a href="#gallery" class="text-slate-300 hover:text-gold-400 transition-colors">Portfolio</a>
+                    <a href="#contact" class="px-5 py-2.5 rounded-lg bg-gold-500 text-charcoal-900 font-bold hover:bg-gold-400 transition-all shadow-lg shadow-gold-500/20 hover:scale-105 active:scale-95">
+                        Get Free Quote
+                    </a>
+                </nav>
+
+                <!-- Mobile Hamburger Button -->
+                <button onclick="toggleMobileMenu()" class="md:hidden p-2 rounded-lg text-slate-300 hover:text-white hover:bg-charcoal-700 focus:outline-none">
+                    <svg id="menu-icon-open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                    <svg id="menu-icon-close" class="hidden w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Drawer Menu -->
+        <div id="mobile-menu" class="hidden md:hidden border-t border-white/10 bg-charcoal-800/95 backdrop-blur-xl px-4 pt-4 pb-6 space-y-3">
+            <a href="#home" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-charcoal-700">Home</a>
+            <a href="#about" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:bg-charcoal-700">About Us</a>
+            <a href="#visualizer" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:bg-charcoal-700">Finish Visualizer</a>
+            <a href="#gallery" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:bg-charcoal-700">Portfolio</a>
+            <a href="#contact" onclick="toggleMobileMenu()" class="block text-center px-4 py-3 rounded-lg bg-gold-500 text-charcoal-900 font-bold hover:bg-gold-400 transition-all shadow-md">
+                Get Free Quote
+            </a>
+        </div>
+    </header>
+
+    <!-- HERO SECTION WITH CANVAS BG -->
+    <section id="home" class="relative min-h-screen pt-28 pb-16 flex items-center justify-center overflow-hidden">
+        <!-- Interactive Sheen Canvas Background -->
+        <canvas id="paintCanvas" class="absolute inset-0 w-full h-full pointer-events-auto z-0"></canvas>
+        
+        <!-- Gradient overlay -->
+        <div class="absolute inset-0 bg-gradient-to-t from-charcoal-900 via-charcoal-900/70 to-transparent z-0 pointer-events-none"></div>
+
+        <div class="relative z-10 max-w-5xl mx-auto px-4 text-center">
+            <!-- Gold Badge -->
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gold-500/10 border border-gold-500/30 text-gold-400 text-xs sm:text-sm font-semibold tracking-wider uppercase mb-6 animate-pulse">
+                <span class="w-2 h-2 rounded-full bg-gold-500"></span>
+                Premium Finishes, Professional Care
+            </div>
+            
+            <!-- Headline -->
+            <h1 class="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight leading-none text-white mb-6">
+                ARCHITECTURAL PRECISION.<br>
+                <span class="text-gold-500 drop-shadow-[0_4px_25px_rgba(242,183,5,0.3)]">LASTING IMPRESSIONS.</span>
+            </h1>
+            
+            <p class="text-base sm:text-xl text-slate-300 max-w-3xl mx-auto font-light leading-relaxed mb-10">
+                Sydney's premier commercial and luxury residential painters. Dulux accredited, zero-disruption after-hours execution, and premium spec paint systems guaranteed for over 10 years.
+            </p>
+            
+            <!-- CTAs -->
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 mb-16">
+                <a href="#gallery" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-gold-500 text-charcoal-900 text-base font-extrabold hover:bg-gold-400 transition-all shadow-xl shadow-gold-500/20 transform hover:-translate-y-0.5">
+                    VIEW PORTFOLIO
+                </a>
+                <a href="#contact" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-charcoal-800 text-white border border-gold-500/40 text-base font-bold hover:bg-charcoal-700 hover:border-gold-400 transition-all">
+                    GET A FREE QUOTE
+                </a>
+            </div>
+
+            <!-- Trust Metrics Bar -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-4xl mx-auto pt-8 border-t border-white/10">
+                <div class="glass-card p-4 rounded-xl text-center">
+                    <div class="text-3xl font-black text-gold-500 mb-1">20Y+</div>
+                    <div class="text-xs text-slate-400 uppercase font-semibold">Commercial Experience</div>
+                </div>
+                <div class="glass-card p-4 rounded-xl text-center">
+                    <div class="text-3xl font-black text-gold-500 mb-1">$20M+</div>
+                    <div class="text-xs text-slate-400 uppercase font-semibold">Public Liability Insured</div>
+                </div>
+                <div class="glass-card p-4 rounded-xl text-center">
+                    <div class="text-3xl font-black text-gold-500 mb-1">24/7</div>
+                    <div class="text-xs text-slate-400 uppercase font-semibold">Zero-Disruption Execution</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id="about" class="py-24 bg-charcoal-800/60 relative border-t border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <div class="text-gold-500 font-bold uppercase tracking-wider text-sm mb-2">Uncompromising Standards</div>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white mb-6">Built for Commercial Durability & Architectural Perfection</h2>
+                    <p class="text-slate-300 leading-relaxed mb-6">
+                        At <strong class="text-gold-400">ENSURE Painting & Decorating</strong>, we specialize in high-end commercial, strata, and luxury residential projects across Sydney. We understand that commercial repaints and high-finish specifications demand strict adherence to safety, timelines, and surface preparation.
+                    </p>
+                    <p class="text-slate-400 leading-relaxed mb-8">
+                        Our teams utilize industry-leading paint systems—including Dulux, Taubmans, and Jotun 2-pack epoxies—with strictly low-VOC and zero-odor formulas suitable for active commercial buildings, healthcare, retail spaces, and luxury residences.
+                    </p>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="flex items-start gap-3">
+                            <div class="p-2 rounded-lg bg-gold-500/10 text-gold-500 shrink-0">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white text-sm">WHS & SWMS Compliant</h4>
+                                <p class="text-xs text-slate-400">Strict safety protocols on every site</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <div class="p-2 rounded-lg bg-gold-500/10 text-gold-500 shrink-0">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white text-sm">Night & Weekend Shift</h4>
+                                <p class="text-xs text-slate-400">Zero business downtime</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative">
+                    <div class="relative rounded-2xl overflow-hidden border border-gold-500/20 shadow-2xl">
+                        <img src="https://images.unsplash.com/photo-1562259949-e8e7689d7828?auto=format&fit=crop&w=1000&q=80" alt="Ensure Painting Team" class="w-full h-[420px] object-cover" onerror="this.src='https://placehold.co/800x600/141619/F2B705?text=ENSURE+Painting+Sydney'">
+                        <div class="absolute inset-0 bg-gradient-to-t from-charcoal-900 via-transparent to-transparent"></div>
+                        <div class="absolute bottom-6 left-6 right-6 p-4 glass-panel rounded-xl">
+                            <div class="flex items-center justify-between text-xs text-slate-300">
+                                <span class="font-bold text-gold-400">Dulux Accredited Contractor</span>
+                                <span>ISO 9001 Quality Assured</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SURFACE FINISH & SHEEN VISUALIZER -->
+    <section id="visualizer" class="py-24 bg-charcoal-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <div class="text-gold-500 font-bold uppercase tracking-wider text-sm mb-2">Interactive Tool</div>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white mb-4">Surface Finish & Sheen Visualizer</h2>
+                <p class="text-slate-400 text-sm sm:text-base">
+                    Select from premium Australian commercial paint swatches and sheen specifications to preview texture, sheen reflection, and substrate compatibility.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                
+                <!-- Room Preview Container -->
+                <div class="lg:col-span-7 glass-panel rounded-2xl p-4 sm:p-6 border border-white/10 relative">
+                    <div class="relative w-full h-[340px] sm:h-[420px] rounded-xl overflow-hidden bg-charcoal-800">
+                        <!-- Wall surface color layer -->
+                        <div id="visualizer-wall" class="absolute inset-0 transition-all duration-500 bg-[#EFECE4]"></div>
+                        
+                        <!-- Sheen effect overlay -->
+                        <div id="visualizer-sheen-overlay" class="absolute inset-0 pointer-events-none opacity-20 transition-opacity duration-300" style="background: linear-gradient(135deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 60%);"></div>
+
+                        <!-- Architectural room mockup SVG lines -->
+                        <svg class="absolute inset-0 w-full h-full text-charcoal-900/30 stroke-current pointer-events-none" viewBox="0 0 800 600" fill="none">
+                            <path d="M0 480 L250 360 L550 360 L800 480 M250 360 L250 0 M550 360 L550 0" stroke-width="4" opacity="0.4"/>
+                            <!-- Frame & furniture contours -->
+                            <rect x="330" y="120" width="140" height="180" rx="4" stroke="#ffffff" stroke-width="3" opacity="0.3" fill="rgba(0,0,0,0.15)"/>
+                        </svg>
+
+                        <!-- Selected Spec Overlay Tag -->
+                        <div class="absolute top-4 left-4 glass-panel px-3 py-2 rounded-lg text-xs font-mono border border-white/20">
+                            <div class="text-slate-400">Active Specification:</div>
+                            <div class="text-white font-bold" id="spec-display-name">Dulux Natural White™ (Low-Sheen Commercial)</div>
+                        </div>
+                    </div>
+
+                    <!-- Add Spec to Quote Button -->
+                    <div class="mt-4 flex justify-end">
+                        <button onclick="applySpecToQuote()" class="w-full sm:w-auto px-6 py-3 rounded-lg bg-gold-500 text-charcoal-900 font-bold hover:bg-gold-400 transition-all shadow-md flex items-center justify-center gap-2">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                            <span>Add Selected Spec to Quote Request</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Controls Container -->
+                <div class="lg:col-span-5 space-y-6">
+                    <!-- Color Swatches -->
+                    <div class="glass-panel p-6 rounded-2xl">
+                        <h3 class="text-white font-bold text-base mb-4 flex items-center justify-between">
+                            <span>1. Select Paint Color (Dulux®)</span>
+                            <span id="selected-color-hex" class="text-xs text-gold-400 font-mono">#EFECE4</span>
+                        </h3>
+                        <div class="grid grid-cols-3 gap-3">
+                            <button onclick="setVisualizerColor('#F4F5F3', 'Lexicon Quarter')" class="color-swatch-btn p-3 rounded-xl border border-white/10 hover:border-gold-500 transition-all text-left group" data-color="#F4F5F3">
+                                <div class="w-full h-10 rounded-lg mb-2 shadow-inner border border-black/10" style="background-color: #F4F5F3;"></div>
+                                <div class="text-xs font-bold text-white group-hover:text-gold-400">Lexicon Qtr</div>
+                                <div class="text-[10px] text-slate-400">Clean Crisp White</div>
+                            </button>
+                            <button onclick="setVisualizerColor('#EFECE4', 'Natural White')" class="color-swatch-btn p-3 rounded-xl border-2 border-gold-500 transition-all text-left group" data-color="#EFECE4">
+                                <div class="w-full h-10 rounded-lg mb-2 shadow-inner border border-black/10" style="background-color: #EFECE4;"></div>
+                                <div class="text-xs font-bold text-white group-hover:text-gold-400">Natural White</div>
+                                <div class="text-[10px] text-slate-400">Warm Architectural</div>
+                            </button>
+                            <button onclick="setVisualizerColor('#E5DEC9', 'Hog Bristle Quarter')" class="color-swatch-btn p-3 rounded-xl border border-white/10 hover:border-gold-500 transition-all text-left group" data-color="#E5DEC9">
+                                <div class="w-full h-10 rounded-lg mb-2 shadow-inner border border-black/10" style="background-color: #E5DEC9;"></div>
+                                <div class="text-xs font-bold text-white group-hover:text-gold-400">Hog Bristle</div>
+                                <div class="text-[10px] text-slate-400">Classic Neutral</div>
+                            </button>
+                            <button onclick="setVisualizerColor('#DCE0DC', 'Surfmist')" class="color-swatch-btn p-3 rounded-xl border border-white/10 hover:border-gold-500 transition-all text-left group" data-color="#DCE0DC">
+                                <div class="w-full h-10 rounded-lg mb-2 shadow-inner border border-black/10" style="background-color: #DCE0DC;"></div>
+                                <div class="text-xs font-bold text-white group-hover:text-gold-400">Surfmist</div>
+                                <div class="text-[10px] text-slate-400">Modern Off-Grey</div>
+                            </button>
+                            <button onclick="setVisualizerColor('#323639', 'Monument')" class="color-swatch-btn p-3 rounded-xl border border-white/10 hover:border-gold-500 transition-all text-left group" data-color="#323639">
+                                <div class="w-full h-10 rounded-lg mb-2 shadow-inner border border-black/10" style="background-color: #323639;"></div>
+                                <div class="text-xs font-bold text-white group-hover:text-gold-400">Monument</div>
+                                <div class="text-[10px] text-slate-400">Deep Charcoal</div>
+                            </button>
+                            <button onclick="setVisualizerColor('#26282A', 'Domino')" class="color-swatch-btn p-3 rounded-xl border border-white/10 hover:border-gold-500 transition-all text-left group" data-color="#26282A">
+                                <div class="w-full h-10 rounded-lg mb-2 shadow-inner border border-black/10" style="background-color: #26282A;"></div>
+                                <div class="text-xs font-bold text-white group-hover:text-gold-400">Domino</div>
+                                <div class="text-[10px] text-slate-400">Ultra Dark Accent</div>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Sheen Selectors -->
+                    <div class="glass-panel p-6 rounded-2xl">
+                        <h3 class="text-white font-bold text-base mb-4">2. Select Finish & Sheen Level</h3>
+                        <div class="space-y-2">
+                            <button onclick="setSheen('matte', 'Matte Architectural', 0.05)" class="sheen-btn w-full p-3 rounded-xl border border-white/10 hover:border-gold-500 text-left transition-all flex items-center justify-between" data-sheen="matte">
+                                <div>
+                                    <div class="text-sm font-bold text-white">Matte Architectural</div>
+                                    <div class="text-xs text-slate-400">Non-reflective, ideal for executive ceilings & high-end walls</div>
+                                </div>
+                                <span class="text-xs font-mono text-gold-400">2-5% Sheen</span>
+                            </button>
+                            <button onclick="setSheen('low-sheen', 'Low-Sheen Commercial', 0.2)" class="sheen-btn w-full p-3 rounded-xl border-2 border-gold-500 text-left transition-all flex items-center justify-between" data-sheen="low-sheen">
+                                <div>
+                                    <div class="text-sm font-bold text-white">Low-Sheen Commercial</div>
+                                    <div class="text-xs text-slate-400">Washable, scrub-resistant, standard for offices & retail</div>
+                                </div>
+                                <span class="text-xs font-mono text-gold-400">10-15% Sheen</span>
+                            </button>
+                            <button onclick="setSheen('satin', 'Satin Trim & Doors', 0.45)" class="sheen-btn w-full p-3 rounded-xl border border-white/10 hover:border-gold-500 text-left transition-all flex items-center justify-between" data-sheen="satin">
+                                <div>
+                                    <div class="text-sm font-bold text-white">Satin Polyurethane Trim</div>
+                                    <div class="text-xs text-slate-400">High durability for skirtings, architraves & timber doors</div>
+                                </div>
+                                <span class="text-xs font-mono text-gold-400">30-40% Sheen</span>
+                            </button>
+                            <button onclick="setSheen('epoxy', '2-Pack Epoxy Industrial', 0.75)" class="sheen-btn w-full p-3 rounded-xl border border-white/10 hover:border-gold-500 text-left transition-all flex items-center justify-between" data-sheen="epoxy">
+                                <div>
+                                    <div class="text-sm font-bold text-white">2-Pack Industrial Epoxy</div>
+                                    <div class="text-xs text-slate-400">Heavy duty gloss floor & wall anti-graffiti specification</div>
+                                </div>
+                                <span class="text-xs font-mono text-gold-400">80%+ High Gloss</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- PROJECT GALLERY SECTION -->
+    <section id="gallery" class="py-24 bg-charcoal-800/40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+                <div>
+                    <div class="text-gold-500 font-bold uppercase tracking-wider text-sm mb-2">Our Portfolio</div>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white">Featured Commercial Projects</h2>
+                </div>
+                <button onclick="openUploadModal()" class="mt-4 md:mt-0 inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-charcoal-700 border border-gold-500/40 text-gold-400 hover:bg-gold-500 hover:text-charcoal-900 font-bold transition-all">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                    <span>+ Upload Project Media</span>
+                </button>
+            </div>
+
+            <!-- BEFORE & AFTER SLIDER INTERACTIVE DEMO -->
+            <div class="mb-16 glass-panel p-6 rounded-2xl border border-gold-500/20">
+                <h3 class="text-lg font-bold text-white mb-4 flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-gold-500"></span>
+                    Interactive Transformation Slider (Drag Left/Right)
+                </h3>
+                <div id="before-after-container" class="relative w-full h-[320px] sm:h-[460px] rounded-xl overflow-hidden select-none cursor-ew-resize">
+                    <!-- After Image (Full background) -->
+                    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80" class="absolute inset-0 w-full h-full object-cover" alt="After Refurbishment">
+                    <div class="absolute top-4 right-4 bg-gold-500 text-charcoal-900 text-xs font-black px-3 py-1 rounded-md">AFTER (ENSURE SPEC)</div>
+
+                    <!-- Before Image (Clipped overlay) -->
+                    <div id="before-image-wrapper" class="absolute inset-y-0 left-0 overflow-hidden w-1/2 border-r-2 border-gold-500">
+                        <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1200&q=80" class="absolute inset-0 w-full h-full object-cover filter grayscale brightness-75 max-w-none" id="before-img-inner" alt="Before Restoration">
+                        <div class="absolute top-4 left-4 bg-charcoal-900/90 text-white text-xs font-black px-3 py-1 rounded-md">BEFORE RESTORATION</div>
+                    </div>
+
+                    <!-- Slider Handle -->
+                    <div id="slider-handle" class="absolute top-0 bottom-0 left-1/2 w-8 -ml-4 flex items-center justify-center pointer-events-none">
+                        <div class="w-8 h-8 rounded-full bg-gold-500 text-charcoal-900 font-bold flex items-center justify-center shadow-2xl">
+                            &#8644;
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Media Grid -->
+            <div id="gallery-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Project Card 1 -->
+                <div class="glass-card rounded-xl overflow-hidden group">
+                    <div class="relative h-60 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80" alt="CBD Office Tower" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-charcoal-900 via-transparent to-transparent opacity-80"></div>
+                        <button onclick="openLightbox('https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1600&q=80')" class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-charcoal-900/40">
+                            <span class="px-4 py-2 rounded-lg bg-gold-500 text-charcoal-900 font-bold text-xs">View Full Screen</span>
+                        </button>
+                    </div>
+                    <div class="p-5">
+                        <span class="text-xs text-gold-400 font-mono font-semibold uppercase">Commercial Office • Martin Place Sydney</span>
+                        <h4 class="text-lg font-bold text-white mt-1">24-Story Interior Commercial Repaint</h4>
+                        <p class="text-xs text-slate-400 mt-2">Night shift execution with zero disturbance to active financial tenants.</p>
+                    </div>
+                </div>
+
+                <!-- Project Card 2 -->
+                <div class="glass-card rounded-xl overflow-hidden group">
+                    <div class="relative h-60 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800&q=80" alt="Strata Exterior" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-charcoal-900 via-transparent to-transparent opacity-80"></div>
+                        <button onclick="openLightbox('https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1600&q=80')" class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-charcoal-900/40">
+                            <span class="px-4 py-2 rounded-lg bg-gold-500 text-charcoal-900 font-bold text-xs">View Full Screen</span>
+                        </button>
+                    </div>
+                    <div class="p-5">
+                        <span class="text-xs text-gold-400 font-mono font-semibold uppercase">Strata Complex • Neutral Bay</span>
+                        <h4 class="text-lg font-bold text-white mt-1">Luxury Waterfront Facade Membrane</h4>
+                        <p class="text-xs text-slate-400 mt-2">Dulux Acratex weather-shield anti-carbonation protective coating.</p>
+                    </div>
+                </div>
+
+                <!-- Project Card 3 -->
+                <div class="glass-card rounded-xl overflow-hidden group">
+                    <div class="relative h-60 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=80" alt="Retail Showroom" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-charcoal-900 via-transparent to-transparent opacity-80"></div>
+                        <button onclick="openLightbox('https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1600&q=80')" class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-charcoal-900/40">
+                            <span class="px-4 py-2 rounded-lg bg-gold-500 text-charcoal-900 font-bold text-xs">View Full Screen</span>
+                        </button>
+                    </div>
+                    <div class="p-5">
+                        <span class="text-xs text-gold-400 font-mono font-semibold uppercase">Flagship Retail • Pitt St Mall</span>
+                        <h4 class="text-lg font-bold text-white mt-1">High-Gloss Epoxy & Decorative Finishes</h4>
+                        <p class="text-xs text-slate-400 mt-2">Architectural metallic spray application and custom wall plaster.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- COMMERCIAL QUOTE REQUEST SECTION -->
+    <section id="contact" class="py-24 bg-charcoal-900 relative">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="glass-panel p-8 sm:p-12 rounded-3xl border border-gold-500/30 relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-64 h-64 bg-gold-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+                <div class="text-center mb-10">
+                    <div class="text-gold-500 font-bold uppercase tracking-wider text-xs mb-2">Fast Turnaround Quotation</div>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white">Commercial Quote Request</h2>
+                    <p class="text-slate-400 text-sm mt-2">Submit project dimensions or specs for an itemized Tender Proposal within 24 hours.</p>
+                </div>
+
+                <form id="quote-form" onsubmit="handleQuoteSubmit(event)" class="space-y-6">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2">Contact Name *</label>
+                            <input type="text" required id="quote-name" class="w-full px-4 py-3 rounded-xl bg-charcoal-800 border border-white/10 text-white placeholder-slate-500 focus:outline-none focus:border-gold-500 transition-colors" placeholder="e.g. John Smith">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2">Company / Strata Plan *</label>
+                            <input type="text" required id="quote-company" class="w-full px-4 py-3 rounded-xl bg-charcoal-800 border border-white/10 text-white placeholder-slate-500 focus:outline-none focus:border-gold-500 transition-colors" placeholder="e.g. Lendlease / SP12345">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2">Email Address *</label>
+                            <input type="email" required id="quote-email" class="w-full px-4 py-3 rounded-xl bg-charcoal-800 border border-white/10 text-white placeholder-slate-500 focus:outline-none focus:border-gold-500 transition-colors" placeholder="john@company.com.au">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2">Phone Number *</label>
+                            <input type="tel" required id="quote-phone" class="w-full px-4 py-3 rounded-xl bg-charcoal-800 border border-white/10 text-white placeholder-slate-500 focus:outline-none focus:border-gold-500 transition-colors" placeholder="0400 000 000">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2">Sector Type</label>
+                            <select id="quote-sector" class="w-full px-4 py-3 rounded-xl bg-charcoal-800 border border-white/10 text-white focus:outline-none focus:border-gold-500 transition-colors">
+                                <option value="Commercial Office">Commercial Office</option>
+                                <option value="Strata & Residential Complex">Strata & Residential Complex</option>
+                                <option value="Industrial & Warehouse">Industrial & Warehouse</option>
+                                <option value="Retail & Hospitality">Retail & Hospitality</option>
+                                <option value="High-End Heritage & Architectural">High-End Heritage & Architectural</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2">Estimated Area / Spec</label>
+                            <input type="text" id="quote-spec" class="w-full px-4 py-3 rounded-xl bg-charcoal-800 border border-white/10 text-white placeholder-slate-500 focus:outline-none focus:border-gold-500 transition-colors" placeholder="e.g. 1,200 sqm (Dulux Low-Sheen)">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2">Project Scope & Details</label>
+                        <textarea id="quote-details" rows="4" class="w-full px-4 py-3 rounded-xl bg-charcoal-800 border border-white/10 text-white placeholder-slate-500 focus:outline-none focus:border-gold-500 transition-colors" placeholder="Describe surface conditions, timing constraints, and special access requirements..."></textarea>
+                    </div>
+
+                    <button type="submit" class="w-full py-4 rounded-xl bg-gold-500 text-charcoal-900 font-extrabold text-base hover:bg-gold-400 transition-all shadow-xl shadow-gold-500/20 transform hover:-translate-y-0.5">
+                        SUBMIT DISPATCH QUOTE REQUEST
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="py-12 bg-charcoal-900 border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div id="footer-logo-container">
+                <!-- Dynamically updated footer logo -->
+            </div>
+            <div class="text-xs text-slate-500 text-center md:text-right">
+                <p>&copy; 2026 ENSURE Painting & Decorating Pty Ltd. All Rights Reserved.</p>
+                <p class="mt-1">Sydney Commercial License #39281C • Fully Insured ($20M)</p>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- ========================================== -->
+    <!-- LOGO CUSTOMIZER MODAL (WITH LIVE PREVIEW) -->
+    <!-- ========================================== -->
+    <div id="logo-modal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-md flex items-center justify-center p-4 overflow-y-auto">
+        <div class="glass-panel w-full max-w-2xl rounded-2xl border border-gold-500/40 p-6 sm:p-8 relative shadow-2xl my-8">
+            <!-- Modal Header -->
+            <div class="flex items-center justify-between border-b border-white/10 pb-4 mb-6">
+                <div class="flex items-center gap-2">
+                    <div class="p-2 rounded-lg bg-gold-500/20 text-gold-400">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-white">Logo Customizer</h3>
+                        <p class="text-xs text-slate-400">Edit graphic emblem, upload logo image, and customize title text</p>
+                    </div>
+                </div>
+                <button onclick="closeLogoModal()" class="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/10">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+
+            <!-- LIVE PREVIEW PANEL (Header dark context) -->
+            <div class="mb-6">
+                <label class="block text-xs font-bold uppercase tracking-wider text-gold-400 mb-2">Live Header Preview (Real-time)</label>
+                <div class="w-full h-24 rounded-xl bg-charcoal-900 border border-white/20 p-4 flex items-center justify-center overflow-hidden relative shadow-inner">
+                    <div id="modal-live-preview-container" class="flex items-center">
+                        <!-- Preview logo rendered live -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="space-y-6 max-h-[55vh] overflow-y-auto pr-2">
+                <!-- SECTION 1: GRAPHIC / IMAGE UPLOAD -->
+                <div class="p-4 rounded-xl bg-charcoal-800/80 border border-white/5 space-y-4">
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-slate-300">1. Emblem & Custom Image</h4>
+                    
+                    <div>
+                        <label class="block text-xs text-slate-400 mb-1.5">Upload Custom Logo File (PNG / JPG / SVG)</label>
+                        <input type="file" id="modal-logo-file" accept="image/*" onchange="handleLogoFileUpload(event)" class="w-full text-xs text-slate-300 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-gold-500 file:text-charcoal-900 hover:file:bg-gold-400 cursor-pointer">
+                    </div>
+
+                    <div class="flex items-center justify-between pt-2">
+                        <label class="inline-flex items-center gap-2 text-xs text-slate-300 cursor-pointer">
+                            <input type="checkbox" id="modal-blend-black" onchange="onLogoControlChange()" class="w-4 h-4 rounded text-gold-500 focus:ring-gold-500 bg-charcoal-900 border-slate-600">
+                            <span>Blend Black Background (<code class="text-gold-400">mix-blend-mode: screen</code>)</span>
+                        </label>
+
+                        <button onclick="resetLogoImage()" class="px-3 py-1 text-xs rounded bg-white/10 hover:bg-white/20 text-slate-300 transition-colors">
+                            Reset Image to Default SVG
+                        </button>
+                    </div>
+                </div>
+
+                <!-- SECTION 2: DIMENSIONS & SPACING -->
+                <div class="p-4 rounded-xl bg-charcoal-800/80 border border-white/5 space-y-4">
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-slate-300">2. Dimensions & Spacing</h4>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <div class="flex justify-between text-xs mb-1">
+                                <span class="text-slate-400">Logo Height</span>
+                                <span id="val-height" class="font-mono text-gold-400">48px</span>
+                            </div>
+                            <input type="range" id="modal-logo-height" min="32" max="96" value="48" oninput="onLogoControlChange()" class="w-full accent-gold-500">
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between text-xs mb-1">
+                                <span class="text-slate-400">Gap (Logo to Text)</span>
+                                <span id="val-gap" class="font-mono text-gold-400">12px</span>
+                            </div>
+                            <input type="range" id="modal-logo-gap" min="0" max="28" value="12" oninput="onLogoControlChange()" class="w-full accent-gold-500">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECTION 3: TYPOGRAPHY EDITING -->
+                <div class="p-4 rounded-xl bg-charcoal-800/80 border border-white/5 space-y-4">
+                    <div class="flex items-center justify-between">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-300">3. Adjacent Typography Text</h4>
+                        <label class="inline-flex items-center gap-2 text-xs text-slate-300 cursor-pointer">
+                            <input type="checkbox" id="modal-show-text" checked onchange="onLogoControlChange()" class="w-4 h-4 rounded text-gold-500 focus:ring-gold-500 bg-charcoal-900 border-slate-600">
+                            <span>Show Text</span>
+                        </label>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs text-slate-400 mb-1">Main Title Text</label>
+                            <input type="text" id="modal-title-text" value="ENSURE" oninput="onLogoControlChange()" class="w-full px-3 py-2 rounded-lg bg-charcoal-900 border border-white/10 text-white text-sm focus:border-gold-500 focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs text-slate-400 mb-1">Subtitle Text</label>
+                            <input type="text" id="modal-subtitle-text" value="PAINTING & DECORATING" oninput="onLogoControlChange()" class="w-full px-3 py-2 rounded-lg bg-charcoal-900 border border-white/10 text-white text-sm focus:border-gold-500 focus:outline-none">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <div class="flex justify-between text-xs mb-1">
+                                <span class="text-slate-400">Title Font Size</span>
+                                <span id="val-font-size" class="font-mono text-gold-400">24px</span>
+                            </div>
+                            <input type="range" id="modal-font-size" min="16" max="38" value="24" oninput="onLogoControlChange()" class="w-full accent-gold-500">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs text-slate-400 mb-1">Main Text Color</label>
+                            <select id="modal-text-color" onchange="onLogoControlChange()" class="w-full px-3 py-2 rounded-lg bg-charcoal-900 border border-white/10 text-white text-sm focus:border-gold-500 focus:outline-none">
+                                <option value="#F2B705">Ensure Gold (#F2B705)</option>
+                                <option value="#FFFFFF">Crisp White (#FFFFFF)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal Action Buttons -->
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-3 border-t border-white/10 pt-4 mt-6">
+                <button onclick="resetAllLogoDefaults()" class="w-full sm:w-auto px-4 py-2 rounded-lg bg-red-500/10 text-red-400 border border-red-500/20 text-xs font-semibold hover:bg-red-500/20 transition-all">
+                    Reset All to Default
+                </button>
+                <div class="flex items-center gap-3 w-full sm:w-auto">
+                    <button onclick="closeLogoModal()" class="w-1/2 sm:w-auto px-5 py-2.5 rounded-lg bg-charcoal-700 text-slate-300 text-xs font-bold hover:bg-charcoal-600 transition-all">
+                        Cancel
+                    </button>
+                    <button onclick="saveAndApplyLogo()" class="w-1/2 sm:w-auto px-6 py-2.5 rounded-lg bg-gold-500 text-charcoal-900 text-xs font-extrabold hover:bg-gold-400 transition-all shadow-lg shadow-gold-500/20">
+                        Save & Apply
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- LIGHTBOX MODAL FOR GALLERY -->
+    <div id="lightbox-modal" class="fixed inset-0 z-50 hidden bg-black/95 backdrop-blur-lg flex items-center justify-center p-4">
+        <button onclick="closeLightbox()" class="absolute top-6 right-6 p-3 text-white hover:text-gold-500 text-xl font-bold z-10">&times; Close</button>
+        <img id="lightbox-img" class="max-w-full max-h-[90vh] object-contain rounded-xl border border-gold-500/30">
+    </div>
+
+    <!-- UPLOAD MEDIA MODAL -->
+    <div id="upload-modal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
+        <div class="glass-panel max-w-md w-full p-6 rounded-2xl border border-gold-500/30">
+            <h3 class="text-xl font-bold text-white mb-4">Add Project Media</h3>
+            <input type="text" id="upload-title" placeholder="Project Title" class="w-full p-3 rounded-lg bg-charcoal-800 border border-white/10 text-white mb-3 text-sm">
+            <input type="text" id="upload-subtitle" placeholder="Location / Category" class="w-full p-3 rounded-lg bg-charcoal-800 border border-white/10 text-white mb-3 text-sm">
+            <input type="text" id="upload-url" placeholder="Image URL (Unsplash or direct image link)" class="w-full p-3 rounded-lg bg-charcoal-800 border border-white/10 text-white mb-4 text-sm">
+            <div class="flex justify-end gap-3">
+                <button onclick="closeUploadModal()" class="px-4 py-2 rounded-lg bg-charcoal-700 text-slate-300 text-xs font-bold">Cancel</button>
+                <button onclick="saveProjectMedia()" class="px-5 py-2 bg-gold-500 text-charcoal-900 font-bold text-xs rounded-lg">Add to Gallery</button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // ==========================================
+        // DEFAULT LOGO CONFIGURATION & STATE
+        // ==========================================
+        const DEFAULT_LOGO_STATE = {
+            imageSrc: null, // null means use standard geometric SVG logo
+            blendBlack: false,
+            logoHeight: 48,
+            logoGap: 12,
+            titleText: 'ENSURE',
+            subtitleText: 'PAINTING & DECORATING',
+            titleFontSize: 24,
+            titleColor: '#F2B705',
+            showText: true
+        };
+
+        let currentLogoState = { ...DEFAULT_LOGO_STATE };
+
+        // Load saved logo configuration from localStorage if available
+        function loadLogoState() {
+            try {
+                const saved = localStorage.getItem('ensure_custom_logo_v2');
+                if (saved) {
+                    currentLogoState = Object.assign({}, DEFAULT_LOGO_STATE, JSON.parse(saved));
+                }
+            } catch (e) {
+                console.warn('Could not parse saved logo state', e);
+            }
+        }
+
+        // Generate HTML structure for logo based on state
+        function renderLogoHTML(state) {
+            const height = state.logoHeight || 48;
+            const gap = state.logoGap !== undefined ? state.logoGap : 12;
+            const title = state.titleText || 'ENSURE';
+            const subtitle = state.subtitleText || 'PAINTING & DECORATING';
+            const fontSize = state.titleFontSize || 24;
+            const color = state.titleColor || '#F2B705';
+            const showText = state.showText !== false;
+            const blendClass = state.blendBlack ? 'blend-screen' : '';
+
+            let graphicMarkup = '';
+            if (state.imageSrc) {
+                graphicMarkup = `<img src="${state.imageSrc}" alt="ENSURE Logo" class="${blendClass} object-contain transition-all" style="height:${height}px;">`;
+            } else {
+                // Official Geometric Gold Broken Square Emblem with Central Block 'E' SVG
+                graphicMarkup = `
+                    <svg viewBox="0 0 100 100" class="transition-all shrink-0" style="height:${height}px; width:auto;">
+                        <defs>
+                            <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#F5C842"/>
+                                <stop offset="50%" stop-color="#F2B705"/>
+                                <stop offset="100%" stop-color="#B37D03"/>
+                            </linearGradient>
+                        </defs>
+                        <!-- Top Left Frame Segment -->
+                        <polygon points="10,10 90,10 90,24 24,24 24,90 10,90" fill="url(#goldGrad)" />
+                        <!-- Bottom Right Frame Segment -->
+                        <polygon points="90,90 10,90 10,76 76,76 76,10 90,10" fill="url(#goldGrad)" opacity="0.85" />
+                        <!-- Central Solid Bold 'E' -->
+                        <path d="M35 34 H68 V44 H47 V49 H64 V58 H47 V64 H68 V74 H35 Z" fill="url(#goldGrad)" />
+                    </svg>
+                `;
+            }
+
+            let textMarkup = '';
+            if (showText) {
+                textMarkup = `
+                    <div class="flex flex-col justify-center leading-none select-none">
+                        <span style="font-size:${fontSize}px; color:${color};" class="font-black tracking-wider uppercase font-sans drop-shadow-sm">
+                            ${title}
+                        </span>
+                        <span class="text-[9px] sm:text-[10px] text-slate-300 tracking-[0.25em] font-semibold uppercase mt-1">
+                            ${subtitle}
+                        </span>
+                    </div>
+                `;
+            }
+
+            return `
+                <div class="flex items-center" style="gap:${gap}px;">
+                    ${graphicMarkup}
+                    ${textMarkup}
+                </div>
+            `;
+        }
+
+        // Apply logo to Header and Footer
+        function renderGlobalLogos() {
+            const html = renderLogoHTML(currentLogoState);
+            const headerContainer = document.getElementById('header-logo-container');
+            const footerContainer = document.getElementById('footer-logo-container');
+            if (headerContainer) headerContainer.innerHTML = html;
+            if (footerContainer) footerContainer.innerHTML = html;
+        }
+
+        // Update live preview in Modal
+        function updateModalPreview(state) {
+            const previewContainer = document.getElementById('modal-live-preview-container');
+            if (previewContainer) {
+                previewContainer.innerHTML = renderLogoHTML(state);
+            }
+            // Update range output badges
+            document.getElementById('val-height').innerText = `${state.logoHeight}px`;
+            document.getElementById('val-gap').innerText = `${state.logoGap}px`;
+            document.getElementById('val-font-size').innerText = `${state.titleFontSize}px`;
+        }
+
+        // Get active state from Modal Controls
+        function getModalControlState() {
+            return {
+                imageSrc: currentLogoState.imageSrc, // preserved unless file uploaded/reset
+                blendBlack: document.getElementById('modal-blend-black').checked,
+                logoHeight: parseInt(document.getElementById('modal-logo-height').value, 10),
+                logoGap: parseInt(document.getElementById('modal-logo-gap').value, 10),
+                titleText: document.getElementById('modal-title-text').value,
+                subtitleText: document.getElementById('modal-subtitle-text').value,
+                titleFontSize: parseInt(document.getElementById('modal-font-size').value, 10),
+                titleColor: document.getElementById('modal-text-color').value,
+                showText: document.getElementById('modal-show-text').checked
+            };
+        }
+
+        // Event handler when modal sliders/inputs change
+        function onLogoControlChange() {
+            const tempState = getModalControlState();
+            updateModalPreview(tempState);
+        }
+
+        // Handle Image File Upload
+        function handleLogoFileUpload(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    currentLogoState.imageSrc = e.target.result;
+                    onLogoControlChange();
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Reset Uploaded Image back to SVG Emblem
+        function resetLogoImage() {
+            currentLogoState.imageSrc = null;
+            document.getElementById('modal-logo-file').value = '';
+            onLogoControlChange();
+        }
+
+        // Modal Controls
+        function openLogoModal() {
+            // Sync controls with current state
+            document.getElementById('modal-blend-black').checked = !!currentLogoState.blendBlack;
+            document.getElementById('modal-logo-height').value = currentLogoState.logoHeight || 48;
+            document.getElementById('modal-logo-gap').value = currentLogoState.logoGap !== undefined ? currentLogoState.logoGap : 12;
+            document.getElementById('modal-title-text').value = currentLogoState.titleText || 'ENSURE';
+            document.getElementById('modal-subtitle-text').value = currentLogoState.subtitleText || 'PAINTING & DECORATING';
+            document.getElementById('modal-font-size').value = currentLogoState.titleFontSize || 24;
+            document.getElementById('modal-text-color').value = currentLogoState.titleColor || '#F2B705';
+            document.getElementById('modal-show-text').checked = currentLogoState.showText !== false;
+
+            updateModalPreview(currentLogoState);
+            document.getElementById('logo-modal').classList.remove('hidden');
+        }
+
+        function closeLogoModal() {
+            document.getElementById('logo-modal').classList.add('hidden');
+        }
+
+        function saveAndApplyLogo() {
+            currentLogoState = getModalControlState();
+            try {
+                localStorage.setItem('ensure_custom_logo_v2', JSON.stringify(currentLogoState));
+            } catch(e) {}
+            renderGlobalLogos();
+            closeLogoModal();
+        }
+
+        function resetAllLogoDefaults() {
+            currentLogoState = { ...DEFAULT_LOGO_STATE };
+            try {
+                localStorage.removeItem('ensure_custom_logo_v2');
+            } catch(e) {}
+            document.getElementById('modal-logo-file').value = '';
+            openLogoModal();
+        }
+
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const openIcon = document.getElementById('menu-icon-open');
+            const closeIcon = document.getElementById('menu-icon-close');
+            menu.classList.toggle('hidden');
+            openIcon.classList.toggle('hidden');
+            closeIcon.classList.toggle('hidden');
+        }
+
+        // ==========================================
+        // HERO CANVAS BRUSH SHEEN ANIMATION
+        // ==========================================
+        function initHeroCanvas() {
+            const canvas = document.getElementById('paintCanvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            let width, height;
+            let mouse = { x: -1000, y: -1000 };
+
+            function resize() {
+                width = canvas.width = window.innerWidth;
+                height = canvas.height = window.innerHeight;
+            }
+            window.addEventListener('resize', resize);
+            resize();
+
+            window.addEventListener('mousemove', (e) => {
+                const rect = canvas.getBoundingClientRect();
+                mouse.x = e.clientX - rect.left;
+                mouse.y = e.clientY - rect.top;
+            });
+
+            const particles = Array.from({ length: 45 }, () => ({
+                x: Math.random() * width,
+                y: Math.random() * height,
+                radius: Math.random() * 80 + 40,
+                vx: (Math.random() - 0.5) * 0.4,
+                vy: (Math.random() - 0.5) * 0.4,
+                alpha: Math.random() * 0.12 + 0.03
+            }));
+
+            function animate() {
+                ctx.clearRect(0, 0, width, height);
+
+                // Draw subtle gold/charcoal brush stroke background particles
+                particles.forEach(p => {
+                    p.x += p.vx;
+                    p.y += p.vy;
+
+                    if (p.x < -100) p.x = width + 100;
+                    if (p.x > width + 100) p.x = -100;
+                    if (p.y < -100) p.y = height + 100;
+                    if (p.y > height + 100) p.y = -100;
+
+                    const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.radius);
+                    grad.addColorStop(0, `rgba(242, 183, 5, ${p.alpha})`);
+                    grad.addColorStop(1, 'rgba(13, 14, 16, 0)');
+
+                    ctx.fillStyle = grad;
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                    ctx.fill();
+                });
+
+                // Mouse interactive golden sheen glow
+                if (mouse.x > 0 && mouse.y > 0) {
+                    const mouseGrad = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, 250);
+                    mouseGrad.addColorStop(0, 'rgba(242, 183, 5, 0.12)');
+                    mouseGrad.addColorStop(1, 'rgba(13, 14, 16, 0)');
+                    ctx.fillStyle = mouseGrad;
+                    ctx.beginPath();
+                    ctx.arc(mouse.x, mouse.y, 250, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+
+                requestAnimationFrame(animate);
+            }
+            animate();
+        }
+
+        // ==========================================
+        // SURFACE VISUALIZER INTERACTIVE CONTROLS
+        // ==========================================
+        let currentVisualizerState = {
+            color: '#EFECE4',
+            colorName: 'Natural White',
+            sheenName: 'Low-Sheen Commercial',
+            opacity: 0.2
+        };
+
+        function setVisualizerColor(hex, name) {
+            currentVisualizerState.color = hex;
+            currentVisualizerState.colorName = name;
+            document.getElementById('visualizer-wall').style.backgroundColor = hex;
+            document.getElementById('selected-color-hex').innerText = hex;
+            updateSpecDisplayText();
+
+            // Highlight active color swatch
+            document.querySelectorAll('.color-swatch-btn').forEach(btn => {
+                if (btn.getAttribute('data-color') === hex) {
+                    btn.classList.add('border-2', 'border-gold-500');
+                    btn.classList.remove('border-white/10');
+                } else {
+                    btn.classList.remove('border-2', 'border-gold-500');
+                    btn.classList.add('border-white/10');
+                }
+            });
+        }
+
+        function setSheen(sheenKey, name, opacity) {
+            currentVisualizerState.sheenName = name;
+            currentVisualizerState.opacity = opacity;
+            document.getElementById('visualizer-sheen-overlay').style.opacity = opacity;
+            updateSpecDisplayText();
+
+            document.querySelectorAll('.sheen-btn').forEach(btn => {
+                if (btn.getAttribute('data-sheen') === sheenKey) {
+                    btn.classList.add('border-2', 'border-gold-500');
+                    btn.classList.remove('border-white/10');
+                } else {
+                    btn.classList.remove('border-2', 'border-gold-500');
+                    btn.classList.add('border-white/10');
+                }
+            });
+        }
+
+        function updateSpecDisplayText() {
+            document.getElementById('spec-display-name').innerText = `Dulux ${currentVisualizerState.colorName} (${currentVisualizerState.sheenName})`;
+        }
+
+        function applySpecToQuote() {
+            const specString = `Dulux ${currentVisualizerState.colorName} (${currentVisualizerState.sheenName} - Hex ${currentVisualizerState.color})`;
+            document.getElementById('quote-spec').value = specString;
+            
+            // Smooth scroll to contact
+            document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // ==========================================
+        // BEFORE & AFTER SLIDER LOGIC
+        // ==========================================
+        function initBeforeAfterSlider() {
+            const container = document.getElementById('before-after-container');
+            const wrapper = document.getElementById('before-image-wrapper');
+            const handle = document.getElementById('slider-handle');
+            const innerImg = document.getElementById('before-img-inner');
+            if (!container || !wrapper || !handle) return;
+
+            let isDragging = false;
+
+            function updateSlider(x) {
+                const rect = container.getBoundingClientRect();
+                let position = x - rect.left;
+                if (position < 0) position = 0;
+                if (position > rect.width) position = rect.width;
+                const percentage = (position / rect.width) * 100;
+                
+                wrapper.style.width = `${percentage}%`;
+                handle.style.left = `${percentage}%`;
+                innerImg.style.width = `${rect.width}px`;
+            }
+
+            function syncInnerWidth() {
+                const rect = container.getBoundingClientRect();
+                innerImg.style.width = `${rect.width}px`;
+            }
+            window.addEventListener('resize', syncInnerWidth);
+            syncInnerWidth();
+
+            container.addEventListener('mousedown', (e) => { isDragging = true; updateSlider(e.clientX); });
+            window.addEventListener('mousemove', (e) => { if (isDragging) updateSlider(e.clientX); });
+            window.addEventListener('mouseup', () => { isDragging = false; });
+
+            // Touch events
+            container.addEventListener('touchstart', (e) => { isDragging = true; updateSlider(e.touches[0].clientX); });
+            window.addEventListener('touchmove', (e) => { if (isDragging) updateSlider(e.touches[0].clientX); });
+            window.addEventListener('touchend', () => { isDragging = false; });
+        }
+
+        // ==========================================
+        // LIGHTBOX & MEDIA UPLOAD LOGIC
+        // ==========================================
+        function openLightbox(imgSrc) {
+            document.getElementById('lightbox-img').src = imgSrc;
+            document.getElementById('lightbox-modal').classList.remove('hidden');
+        }
+        function closeLightbox() {
+            document.getElementById('lightbox-modal').classList.add('hidden');
+        }
+
+        function openUploadModal() {
+            document.getElementById('upload-modal').classList.remove('hidden');
+        }
+        function closeUploadModal() {
+            document.getElementById('upload-modal').classList.add('hidden');
+        }
+
+        function saveProjectMedia() {
+            const title = document.getElementById('upload-title').value;
+            const subtitle = document.getElementById('upload-subtitle').value;
+            const url = document.getElementById('upload-url').value;
+
+            if (!url) return;
+
+            const grid = document.getElementById('gallery-grid');
+            const card = document.createElement('div');
+            card.className = 'glass-card rounded-xl overflow-hidden group';
+            card.innerHTML = `
+                <div class="relative h-60 overflow-hidden">
+                    <img src="${url}" alt="${title}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" onerror="this.src='https://placehold.co/800x600/141619/F2B705?text=Uploaded+Project'">
+                    <div class="absolute inset-0 bg-gradient-to-t from-charcoal-900 via-transparent to-transparent opacity-80"></div>
+                    <button onclick="openLightbox('${url}')" class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-charcoal-900/40">
+                        <span class="px-4 py-2 rounded-lg bg-gold-500 text-charcoal-900 font-bold text-xs">View Full Screen</span>
+                    </button>
+                </div>
+                <div class="p-5">
+                    <span class="text-xs text-gold-400 font-mono font-semibold uppercase">${subtitle || 'Recent Project'}</span>
+                    <h4 class="text-lg font-bold text-white mt-1">${title || 'Commercial Refurbishment'}</h4>
+                </div>
+            `;
+            grid.prepend(card);
+            closeUploadModal();
+        }
+
+        // ==========================================
+        // FORM SUBMISSION & MAILTO DISPATCH
+        // ==========================================
+        function handleQuoteSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('quote-name').value;
+            const company = document.getElementById('quote-company').value;
+            const email = document.getElementById('quote-email').value;
+            const phone = document.getElementById('quote-phone').value;
+            const sector = document.getElementById('quote-sector').value;
+            const spec = document.getElementById('quote-spec').value;
+            const details = document.getElementById('quote-details').value;
+
+            const subject = encodeURIComponent(`ENSURE Commercial Quote Request: ${company} (${name})`);
+            const body = encodeURIComponent(
+                `Contact Name: ${name}\n` +
+                `Company / Strata: ${company}\n` +
+                `Email: ${email}\n` +
+                `Phone: ${phone}\n` +
+                `Sector: ${sector}\n` +
+                `Spec / Area: ${spec}\n\n` +
+                `Project Details:\n${details}`
+            );
+
+            window.location.href = `mailto:info@ensurepainting.com.au?subject=${subject}&body=${body}`;
+
+            // Show Toast Notification
+            showToast('Dispatch mail client loaded! Our estimation team will review your specifications.');
+        }
+
+        function showToast(msg) {
+            const toast = document.createElement('div');
+            toast.className = 'fixed bottom-6 right-6 z-50 glass-panel border border-gold-500 px-6 py-4 rounded-xl text-gold-400 text-sm font-bold shadow-2xl flex items-center gap-3 transition-all transform translate-y-4 opacity-0';
+            toast.innerHTML = `
+                <svg class="w-5 h-5 text-gold-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                <span>${msg}</span>
+            `;
+            document.body.appendChild(toast);
+            setTimeout(() => {
+                toast.classList.remove('translate-y-4', 'opacity-0');
+            }, 50);
+            setTimeout(() => {
+                toast.classList.add('translate-y-4', 'opacity-0');
+                setTimeout(() => toast.remove(), 300);
+            }, 4000);
+        }
+
+        // ==========================================
+        // INITIALIZATION ON WINDOW LOAD
+        // ==========================================
+        window.onload = function() {
+            loadLogoState();
+            renderGlobalLogos();
+            initHeroCanvas();
+            initBeforeAfterSlider();
+        };
+    </script>
+</body>
+</html>
