@@ -1,0 +1,1674 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ENSURE Painting & Decorating | Premium Commercial & Residential Painting</title>
+  <meta name="description" content="ENSURE Painting & Decorating — 20+ years of commercial and residential painting excellence in Sydney & Australia. Premium finishes, professional care." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            darkBg: '#0D0E10',
+            cardBg: '#141619',
+            borderDark: '#23272E',
+            ensureGold: '#F2B705',
+            slateText: '#9CA3AF'
+          },
+          fontFamily: {
+            sans: ['Helvetica Neue', 'Arial', 'sans-serif']
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    body {
+      background-color: #0D0E10;
+      color: #F3F4F6;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      overflow-x: hidden;
+    }
+    .gold-glow {
+      box-shadow: 0 0 25px rgba(242, 183, 5, 0.18);
+    }
+    .ba-container {
+      position: relative;
+      overflow: hidden;
+      user-select: none;
+      touch-action: none;
+    }
+    .ba-before-wrapper {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      clip-path: inset(0 50% 0 0);
+    }
+    .ba-handle {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 2px;
+      background-color: #F2B705;
+      cursor: ew-resize;
+      z-index: 20;
+    }
+    .ba-knob {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 44px;
+      height: 44px;
+      border-radius: 9999px;
+      background-color: #0D0E10;
+      border: 2px solid #F2B705;
+      color: #F2B705;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.7);
+    }
+    .blend-screen {
+      mix-blend-mode: screen;
+    }
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0D0E10;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #23272E;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #F2B705;
+    }
+  </style>
+</head>
+<body class="bg-darkBg text-gray-100 antialiased selection:bg-ensureGold selection:text-darkBg">
+
+  <!-- Hidden Admin Top Status Bar (Only visible when Admin Mode is unlocked) -->
+  <div id="admin-status-bar" class="hidden bg-ensureGold text-darkBg text-xs font-bold py-2 px-4 sticky top-0 z-50 shadow-lg">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
+      <div class="flex items-center gap-2">
+        <span class="inline-block w-2.5 h-2.5 rounded-full bg-darkBg animate-pulse"></span>
+        <span>ADMIN MODE ACTIVE — Logo, Before/After &amp; Gallery Controls Unlocked</span>
+      </div>
+      <div class="flex items-center gap-3">
+        <button type="button" onclick="openPinChangeModal()" class="underline hover:opacity-80">Change PIN</button>
+        <button type="button" onclick="logoutAdmin()" class="bg-darkBg text-ensureGold px-3 py-1 uppercase tracking-wider hover:bg-black transition">
+          Logout
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation Header -->
+  <header class="sticky top-0 z-40 bg-darkBg/95 backdrop-blur-md border-b border-borderDark">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 sm:h-24 flex items-center justify-between">
+      <!-- Brand Logo + Admin Edit Button -->
+      <div class="flex items-center gap-3">
+        <a href="#home" id="header-logo-link" class="flex items-center gap-2.5 group focus:outline-none">
+          <!-- Default SVG Mark -->
+          <div id="header-logo-svg-wrap" class="flex-shrink-0 transition-transform duration-300 group-hover:scale-105">
+            <svg id="header-logo-svg" width="48" height="48" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M22 50 V22 H98 V98 H56" stroke="#F2B705" stroke-width="6.5" stroke-linecap="square" stroke-linejoin="miter"/>
+              <path d="M46 43 H74 V52 H56 V56.5 H71 V65 H56 V69.5 H74 V78.5 H46 Z" fill="#F2B705"/>
+            </svg>
+          </div>
+          <!-- Custom Uploaded Image (Hidden by default) -->
+          <img id="header-logo-img" src="" alt="ENSURE Logo" class="hidden object-contain" style="height: 48px;" />
+
+          <!-- Brand Text Stack -->
+          <div id="header-logo-text" class="flex flex-col justify-center leading-none">
+            <span id="header-brand-main" class="text-ensureGold font-extrabold tracking-[0.14em]" style="font-size: 24px;">ENSURE</span>
+            <span id="header-brand-sub1" class="text-ensureGold/90 font-semibold tracking-[0.23em] text-[9.5px] mt-1">PAINTING &amp;</span>
+            <span id="header-brand-sub2" class="text-ensureGold/90 font-semibold tracking-[0.21em] text-[9.5px] mt-0.5">DECORATING</span>
+          </div>
+        </a>
+
+        <!-- Hidden Admin Trigger: Edit Logo -->
+        <button id="admin-edit-logo-btn" type="button" onclick="openLogoModal()"
+          class="hidden items-center gap-1.5 px-2.5 py-1.5 border border-ensureGold text-ensureGold hover:bg-ensureGold hover:text-darkBg text-[11px] font-bold uppercase tracking-wider transition">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+          </svg>
+          Edit Logo
+        </button>
+      </div>
+
+      <!-- Desktop Navigation -->
+      <nav class="hidden md:flex items-center space-x-8 text-xs font-bold tracking-[0.18em]">
+        <a href="#home" class="nav-link text-ensureGold transition">HOME</a>
+        <a href="#about" class="nav-link text-gray-300 hover:text-ensureGold transition">ABOUT ENSURE</a>
+        <a href="#visualizer" class="nav-link text-gray-300 hover:text-ensureGold transition">FINISHES</a>
+        <a href="#gallery" class="nav-link text-gray-300 hover:text-ensureGold transition">GALLERY</a>
+        <a href="#contact" class="px-5 py-2.5 bg-ensureGold text-darkBg hover:bg-yellow-400 transition">CONTACT</a>
+      </nav>
+
+      <!-- Mobile Menu Button -->
+      <button id="mobile-menu-btn" type="button" onclick="toggleMobileMenu()" aria-label="Toggle Menu"
+        class="md:hidden p-2 text-gray-200 hover:text-ensureGold focus:outline-none">
+        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobile-menu" class="hidden md:hidden bg-cardBg border-t border-borderDark px-6 py-5 space-y-4">
+      <a href="#home" onclick="closeMobileMenu()" class="block text-sm font-bold tracking-widest text-ensureGold">HOME</a>
+      <a href="#about" onclick="closeMobileMenu()" class="block text-sm font-bold tracking-widest text-gray-300 hover:text-ensureGold">ABOUT ENSURE</a>
+      <a href="#visualizer" onclick="closeMobileMenu()" class="block text-sm font-bold tracking-widest text-gray-300 hover:text-ensureGold">FINISHES</a>
+      <a href="#gallery" onclick="closeMobileMenu()" class="block text-sm font-bold tracking-widest text-gray-300 hover:text-ensureGold">GALLERY</a>
+      <a href="#contact" onclick="closeMobileMenu()" class="block w-full text-center py-3 bg-ensureGold text-darkBg text-sm font-bold tracking-widest">CONTACT</a>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section id="home" class="relative min-h-[88vh] flex items-center border-b border-borderDark overflow-hidden">
+    <!-- Interactive Paint Texture Canvas -->
+    <canvas id="paintCanvas" class="absolute inset-0 w-full h-full pointer-events-none opacity-60"></canvas>
+    <div class="absolute inset-0 bg-gradient-to-r from-darkBg via-darkBg/85 to-darkBg/50 pointer-events-none"></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 w-full">
+      <div class="max-w-3xl">
+        <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 border border-ensureGold/40 bg-ensureGold/10 mb-6">
+          <span class="w-2 h-2 bg-ensureGold"></span>
+          <span class="text-ensureGold text-xs font-bold tracking-[0.22em] uppercase">PREMIUM FINISHES, PROFESSIONAL CARE</span>
+        </div>
+
+        <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.08]">
+          ARCHITECTURAL PRECISION.
+          <span class="block text-ensureGold mt-2">LASTING IMPRESSIONS.</span>
+        </h1>
+
+        <p class="mt-6 text-gray-300 text-base sm:text-lg leading-relaxed max-w-2xl">
+          Trusted commercial, strata, and high-end architectural painting specialists. Delivering meticulous surface preparation, low-VOC commercial coatings, and zero-disruption execution across Sydney and NSW.
+        </p>
+
+        <div class="mt-9 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
+          <a href="#gallery" class="px-8 py-4 bg-ensureGold text-darkBg font-extrabold text-xs tracking-[0.2em] uppercase text-center hover:bg-yellow-400 transition gold-glow">
+            VIEW GALLERY
+          </a>
+          <a href="#contact" class="px-8 py-4 border border-gray-600 text-white font-bold text-xs tracking-[0.2em] uppercase text-center hover:border-ensureGold hover:text-ensureGold transition">
+            REQUEST COMMERCIAL QUOTE
+          </a>
+        </div>
+
+        <!-- Trust Metrics -->
+        <div class="mt-14 pt-8 border-t border-borderDark grid grid-cols-3 gap-6 max-w-xl">
+          <div>
+            <div class="text-2xl sm:text-3xl font-extrabold text-ensureGold">20Y+</div>
+            <div class="text-[11px] sm:text-xs text-slateText uppercase tracking-wider mt-1">Commercial Experience</div>
+          </div>
+          <div>
+            <div class="text-2xl sm:text-3xl font-extrabold text-white">$20M+</div>
+            <div class="text-[11px] sm:text-xs text-slateText uppercase tracking-wider mt-1">Public Liability</div>
+          </div>
+          <div>
+            <div class="text-2xl sm:text-3xl font-extrabold text-white">24/7</div>
+            <div class="text-[11px] sm:text-xs text-slateText uppercase tracking-wider mt-1">Zero-Disruption Ops</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT ENSURE SECTION (Commercial Trust Focused) -->
+  <section id="about" class="py-24 bg-darkBg border-b border-borderDark">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-12 gap-12 items-start">
+        <div class="lg:col-span-5">
+          <span class="text-ensureGold text-xs font-bold tracking-[0.24em] uppercase">ABOUT ENSURE</span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-3 leading-tight">
+            Commercial-Grade Reliability Built Over 20+ Years.
+          </h2>
+          <p class="text-slateText mt-5 leading-relaxed">
+            ENSURE Painting &amp; Decorating partners with strata managers, builders, facility directors, and commercial property owners to protect and elevate high-value assets.
+          </p>
+          <p class="text-slateText mt-4 leading-relaxed">
+            Every project is backed by comprehensive Safe Work Method Statements (SWMS), full WHS compliance, licensed height-access operators, and manufacturer-backed coating warranties.
+          </p>
+
+          <div class="mt-8 p-5 bg-cardBg border-l-4 border-ensureGold">
+            <p class="text-sm text-gray-200 italic">
+              "Our commitment is simple: rigorous preparation, premium specification coatings, and spotless handover on schedule—every single time."
+            </p>
+            <div class="text-xs font-bold text-ensureGold uppercase tracking-wider mt-3">— ENSURE Project Management Team</div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-7 grid sm:grid-cols-2 gap-6">
+          <div class="bg-cardBg border border-borderDark p-7 hover:border-ensureGold/50 transition">
+            <div class="w-10 h-10 bg-ensureGold/10 border border-ensureGold/30 flex items-center justify-center text-ensureGold font-bold mb-5">01</div>
+            <h3 class="text-lg font-bold text-white">Commercial &amp; Office Fit-Outs</h3>
+            <p class="text-sm text-slateText mt-2.5 leading-relaxed">
+              Corporate headquarters, retail flagships, medical suites, and hospitality venues executed with ultra-low VOC, rapid-cure systems.
+            </p>
+          </div>
+
+          <div class="bg-cardBg border border-borderDark p-7 hover:border-ensureGold/50 transition">
+            <div class="w-10 h-10 bg-ensureGold/10 border border-ensureGold/30 flex items-center justify-center text-ensureGold font-bold mb-5">02</div>
+            <h3 class="text-lg font-bold text-white">Strata &amp; Multi-Residential</h3>
+            <p class="text-sm text-slateText mt-2.5 leading-relaxed">
+              Full exterior facade remediation, concrete spalling protection, high-access abseiling/EWP painting, and common area refurbishments.
+            </p>
+          </div>
+
+          <div class="bg-cardBg border border-borderDark p-7 hover:border-ensureGold/50 transition">
+            <div class="w-10 h-10 bg-ensureGold/10 border border-ensureGold/30 flex items-center justify-center text-ensureGold font-bold mb-5">03</div>
+            <h3 class="text-lg font-bold text-white">After-Hours Zero Disruption</h3>
+            <p class="text-sm text-slateText mt-2.5 leading-relaxed">
+              Night and weekend shifts tailored around trading hours so your tenants, staff, and customers experience zero operational downtime.
+            </p>
+          </div>
+
+          <div class="bg-cardBg border border-borderDark p-7 hover:border-ensureGold/50 transition">
+            <div class="w-10 h-10 bg-ensureGold/10 border border-ensureGold/30 flex items-center justify-center text-ensureGold font-bold mb-5">04</div>
+            <h3 class="text-lg font-bold text-white">Certified Spec &amp; Compliance</h3>
+            <p class="text-sm text-slateText mt-2.5 leading-relaxed">
+              Authorized applicators for Dulux, Taubmans, and Jotun protective systems. Fully insured ($20M Public Liability) &amp; White Card certified.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SURFACE FINISH & SHEEN VISUALIZER (Top 6 Australian Dulux Colors + Clean Minimal Room) -->
+  <section id="visualizer" class="py-24 bg-cardBg/50 border-b border-borderDark">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-2xl mb-12">
+        <span class="text-ensureGold text-xs font-bold tracking-[0.24em] uppercase">ARCHITECTURAL SPEC TOOL</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-2">Surface Finish &amp; Australian Palette Visualizer</h2>
+        <p class="text-slateText text-sm sm:text-base mt-3">
+          Preview Australia’s 6 most requested architectural Dulux tones and sheen specifications on a clean interior wall, then attach your preferred spec directly to your quote.
+        </p>
+      </div>
+
+      <div class="grid lg:grid-cols-12 gap-8 items-center">
+        <!-- Clean Minimalist Wall Preview -->
+        <div class="lg:col-span-7 relative border border-borderDark bg-darkBg overflow-hidden h-[360px] sm:h-[460px]">
+          <img
+            src="https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1400&q=85"
+            alt="Minimalist Architectural Wall"
+            class="w-full h-full object-cover"
+          />
+          <!-- Dynamic Color Tint Overlay -->
+          <div id="wall-tint-overlay" class="absolute inset-0 transition-colors duration-500 pointer-events-none"
+            style="background-color: #F4F5F3; mix-blend-mode: multiply; opacity: 0.48;"></div>
+          <!-- Dynamic Sheen Highlight -->
+          <div id="wall-sheen-overlay" class="absolute inset-0 transition-opacity duration-500 pointer-events-none"
+            style="background: linear-gradient(125deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0) 55%); opacity: 0.25;"></div>
+
+          <div class="absolute bottom-4 left-4 right-4 sm:right-auto bg-darkBg/90 backdrop-blur-md border border-borderDark px-4 py-3">
+            <div class="text-[11px] uppercase tracking-widest text-ensureGold font-bold">Active Specification</div>
+            <div id="active-spec-label" class="text-sm font-bold text-white mt-0.5">Dulux Lexicon Quarter — Low-Sheen Commercial</div>
+          </div>
+        </div>
+
+        <!-- Controls -->
+        <div class="lg:col-span-5 bg-cardBg border border-borderDark p-6 sm:p-8 space-y-6">
+          <div>
+            <label class="block text-xs font-bold uppercase tracking-widest text-gray-300 mb-3">
+              1. Top 6 Australian Architectural Colors
+            </label>
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
+              <button type="button" onclick="selectPaintColor('Dulux Lexicon Quarter', '#F4F5F3', this)"
+                class="color-swatch-btn border-2 border-ensureGold bg-darkBg p-2.5 text-left transition">
+                <span class="block w-full h-7 border border-white/10 mb-2" style="background-color: #F4F5F3;"></span>
+                <span class="block text-xs font-bold text-white truncate">Lexicon Qtr</span>
+                <span class="block text-[10px] text-slateText">Crisp Cool White</span>
+              </button>
+
+              <button type="button" onclick="selectPaintColor('Dulux Natural White', '#EFECE4', this)"
+                class="color-swatch-btn border border-borderDark bg-darkBg p-2.5 text-left hover:border-gray-500 transition">
+                <span class="block w-full h-7 border border-white/10 mb-2" style="background-color: #EFECE4;"></span>
+                <span class="block text-xs font-bold text-white truncate">Natural White</span>
+                <span class="block text-[10px] text-slateText">Warm Neutral</span>
+              </button>
+
+              <button type="button" onclick="selectPaintColor('Dulux Hog Bristle Quarter', '#E5DEC9', this)"
+                class="color-swatch-btn border border-borderDark bg-darkBg p-2.5 text-left hover:border-gray-500 transition">
+                <span class="block w-full h-7 border border-white/10 mb-2" style="background-color: #E5DEC9;"></span>
+                <span class="block text-xs font-bold text-white truncate">Hog Bristle Qtr</span>
+                <span class="block text-[10px] text-slateText">Classic Stone</span>
+              </button>
+
+              <button type="button" onclick="selectPaintColor('Dulux Surfmist', '#DCE0DC', this)"
+                class="color-swatch-btn border border-borderDark bg-darkBg p-2.5 text-left hover:border-gray-500 transition">
+                <span class="block w-full h-7 border border-white/10 mb-2" style="background-color: #DCE0DC;"></span>
+                <span class="block text-xs font-bold text-white truncate">Surfmist</span>
+                <span class="block text-[10px] text-slateText">Soft Architectural</span>
+              </button>
+
+              <button type="button" onclick="selectPaintColor('Dulux Monument', '#323639', this)"
+                class="color-swatch-btn border border-borderDark bg-darkBg p-2.5 text-left hover:border-gray-500 transition">
+                <span class="block w-full h-7 border border-white/10 mb-2" style="background-color: #323639;"></span>
+                <span class="block text-xs font-bold text-white truncate">Monument</span>
+                <span class="block text-[10px] text-slateText">Deep Charcoal</span>
+              </button>
+
+              <button type="button" onclick="selectPaintColor('Dulux Domino', '#26282A', this)"
+                class="color-swatch-btn border border-borderDark bg-darkBg p-2.5 text-left hover:border-gray-500 transition">
+                <span class="block w-full h-7 border border-white/10 mb-2" style="background-color: #26282A;"></span>
+                <span class="block text-xs font-bold text-white truncate">Domino</span>
+                <span class="block text-[10px] text-slateText">Feature Slate</span>
+              </button>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold uppercase tracking-widest text-gray-300 mb-3">
+              2. Sheen &amp; Coating System
+            </label>
+            <div class="grid grid-cols-2 gap-2">
+              <button type="button" onclick="selectSheen('Architectural Matte', 0.12, 'Low-glare ceiling & feature finish', this)"
+                class="sheen-btn px-3 py-2.5 border border-borderDark bg-darkBg text-xs font-bold text-gray-300 hover:border-ensureGold text-left transition">
+                Architectural Matte
+              </button>
+              <button type="button" onclick="selectSheen('Low-Sheen Commercial', 0.28, 'High-washability commercial wall standard', this)"
+                class="sheen-btn px-3 py-2.5 border border-ensureGold bg-darkBg text-xs font-bold text-ensureGold text-left transition">
+                Low-Sheen Commercial
+              </button>
+              <button type="button" onclick="selectSheen('Semi-Gloss / Satin Trim', 0.52, 'Doors, architraves & wet area durability', this)"
+                class="sheen-btn px-3 py-2.5 border border-borderDark bg-darkBg text-xs font-bold text-gray-300 hover:border-ensureGold text-left transition">
+                Semi-Gloss Trim
+              </button>
+              <button type="button" onclick="selectSheen('2-Pack Industrial Epoxy', 0.72, 'Heavy-duty warehouse & clinical protection', this)"
+                class="sheen-btn px-3 py-2.5 border border-borderDark bg-darkBg text-xs font-bold text-gray-300 hover:border-ensureGold text-left transition">
+                2-Pack Epoxy
+              </button>
+            </div>
+          </div>
+
+          <div class="p-4 bg-darkBg border border-borderDark text-xs text-slateText flex items-center justify-between">
+            <span>System Performance:</span>
+            <span id="sheen-note" class="text-white font-semibold">High-washability commercial wall standard</span>
+          </div>
+
+          <button type="button" onclick="applySpecToQuote()"
+            class="w-full py-3.5 bg-ensureGold text-darkBg font-extrabold text-xs uppercase tracking-[0.18em] hover:bg-yellow-400 transition">
+            Add Spec to Quote Request &rarr;
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY SECTION (Before/After Slider + Uploadable Photo & Video Portfolio) -->
+  <section id="gallery" class="py-24 bg-darkBg border-b border-borderDark">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Interactive Transformation Slider -->
+      <div class="mb-20">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-5">
+          <div>
+            <h3 id="ba-section-title" class="text-xl sm:text-2xl font-bold text-white flex items-center gap-2.5">
+              <span class="w-2.5 h-2.5 bg-ensureGold inline-block"></span>
+              Interactive Transformation Slider
+            </h3>
+            <p id="ba-section-caption" class="text-slateText text-sm mt-1">
+              Drag the handle left or right to compare pre-treatment substrate vs. finished architectural coating.
+            </p>
+          </div>
+
+          <!-- Hidden Admin Button: Edit Before/After Photos -->
+          <button id="admin-edit-ba-btn" type="button" onclick="openBaModal()"
+            class="hidden items-center gap-2 px-3.5 py-2 border border-ensureGold text-ensureGold hover:bg-ensureGold hover:text-darkBg text-xs font-bold uppercase tracking-wider transition self-start sm:self-auto">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+            Edit Before/After Photos
+          </button>
+        </div>
+
+        <div id="ba-container" class="ba-container w-full h-[320px] sm:h-[460px] border border-borderDark bg-cardBg">
+          <!-- AFTER IMAGE (Base layer) -->
+          <img id="ba-after-img"
+            src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1600&q=85"
+            alt="Finished Commercial Coating"
+            class="w-full h-full object-cover" />
+          <span class="absolute top-4 right-4 bg-ensureGold text-darkBg text-[11px] font-extrabold px-3 py-1 tracking-widest uppercase z-10">
+            AFTER — ENSURE FINISH
+          </span>
+
+          <!-- BEFORE IMAGE (Clipped overlay layer) -->
+          <div id="ba-before-wrapper" class="ba-before-wrapper">
+            <img id="ba-before-img"
+              src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1600&q=85"
+              alt="Pre-Treatment Substrate"
+              class="w-full h-full object-cover grayscale contrast-110" />
+            <span class="absolute top-4 left-4 bg-darkBg/90 text-white border border-borderDark text-[11px] font-bold px-3 py-1 tracking-widest uppercase z-10">
+              BEFORE — PREPARATION
+            </span>
+          </div>
+
+          <!-- Slider Handle -->
+          <div id="ba-handle" class="ba-handle">
+            <div class="ba-knob">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l-4 3 4 3m8-6l4 3-4 3" />
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Portfolio Gallery Header & Filter Controls -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+        <div>
+          <span class="text-ensureGold text-xs font-bold tracking-[0.24em] uppercase">OUR WORK</span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-2">Project Gallery &amp; Walkthroughs</h2>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-2.5">
+          <button type="button" onclick="filterGallery('all', this)" class="gallery-filter-btn px-4 py-2 bg-ensureGold text-darkBg text-xs font-bold uppercase tracking-wider">All</button>
+          <button type="button" onclick="filterGallery('commercial', this)" class="gallery-filter-btn px-4 py-2 bg-cardBg border border-borderDark text-gray-300 hover:border-ensureGold text-xs font-bold uppercase tracking-wider">Commercial</button>
+          <button type="button" onclick="filterGallery('strata', this)" class="gallery-filter-btn px-4 py-2 bg-cardBg border border-borderDark text-gray-300 hover:border-ensureGold text-xs font-bold uppercase tracking-wider">Strata &amp; Exterior</button>
+          <button type="button" onclick="filterGallery('video', this)" class="gallery-filter-btn px-4 py-2 bg-cardBg border border-borderDark text-gray-300 hover:border-ensureGold text-xs font-bold uppercase tracking-wider">Videos</button>
+
+          <!-- Hidden Admin Trigger: + Upload Media -->
+          <button id="admin-upload-btn" type="button" onclick="openUploadModal()"
+            class="hidden items-center gap-1.5 px-4 py-2 border border-ensureGold text-ensureGold hover:bg-ensureGold hover:text-darkBg text-xs font-bold uppercase tracking-wider transition ml-1">
+            <span>+ Upload Media</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Gallery Grid -->
+      <div id="gallery-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+    </div>
+  </section>
+
+  <!-- CONTACT SECTION (Email Quote Dispatch) -->
+  <section id="contact" class="py-24 bg-cardBg/40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-12 gap-12">
+        <div class="lg:col-span-5 space-y-6">
+          <span class="text-ensureGold text-xs font-bold tracking-[0.24em] uppercase">CONTACT ENSURE</span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-white leading-tight">
+            Request a Commercial Tender or Site Inspection.
+          </h2>
+          <p class="text-slateText leading-relaxed">
+            Send us your project details, architectural plans, or site scope. Our senior estimators respond within 24 hours with a transparent, itemized quotation.
+          </p>
+
+          <div class="space-y-4 pt-4 border-t border-borderDark text-sm">
+            <div>
+              <div class="text-xs font-bold uppercase tracking-wider text-ensureGold">Direct Email</div>
+              <a href="mailto:info@ensurepainting.com.au" class="text-white hover:text-ensureGold font-semibold mt-1 inline-block">
+                info@ensurepainting.com.au
+              </a>
+            </div>
+            <div>
+              <div class="text-xs font-bold uppercase tracking-wider text-ensureGold">Service Coverage</div>
+              <div class="text-gray-300 mt-1">Greater Sydney, North Shore, Eastern Suburbs, Western Sydney &amp; NSW Commercial Sites</div>
+            </div>
+            <div>
+              <div class="text-xs font-bold uppercase tracking-wider text-ensureGold">Operating Hours</div>
+              <div class="text-gray-300 mt-1">Mon – Sat: 7:00 AM – 6:00 PM (24/7 After-Hours Commercial Shifts Available)</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-7 bg-cardBg border border-borderDark p-6 sm:p-10">
+          <form id="quote-form" onsubmit="submitQuoteEmail(event)" class="space-y-5">
+            <div class="grid sm:grid-cols-2 gap-5">
+              <div>
+                <label class="block text-xs font-bold uppercase tracking-wider text-gray-300 mb-2">Full Name *</label>
+                <input id="q-name" type="text" required placeholder="John Smith"
+                  class="w-full bg-darkBg border border-borderDark px-4 py-3 text-sm text-white focus:border-ensureGold focus:outline-none" />
+              </div>
+              <div>
+                <label class="block text-xs font-bold uppercase tracking-wider text-gray-300 mb-2">Company / Strata Name</label>
+                <input id="q-company" type="text" placeholder="Apex Commercial Group"
+                  class="w-full bg-darkBg border border-borderDark px-4 py-3 text-sm text-white focus:border-ensureGold focus:outline-none" />
+              </div>
+            </div>
+
+            <div class="grid sm:grid-cols-2 gap-5">
+              <div>
+                <label class="block text-xs font-bold uppercase tracking-wider text-gray-300 mb-2">Email Address *</label>
+                <input id="q-email" type="email" required placeholder="john@company.com.au"
+                  class="w-full bg-darkBg border border-borderDark px-4 py-3 text-sm text-white focus:border-ensureGold focus:outline-none" />
+              </div>
+              <div>
+                <label class="block text-xs font-bold uppercase tracking-wider text-gray-300 mb-2">Phone Number *</label>
+                <input id="q-phone" type="tel" required placeholder="0400 000 000"
+                  class="w-full bg-darkBg border border-borderDark px-4 py-3 text-sm text-white focus:border-ensureGold focus:outline-none" />
+              </div>
+            </div>
+
+            <div class="grid sm:grid-cols-2 gap-5">
+              <div>
+                <label class="block text-xs font-bold uppercase tracking-wider text-gray-300 mb-2">Project Sector</label>
+                <select id="q-sector"
+                  class="w-full bg-darkBg border border-borderDark px-4 py-3 text-sm text-white focus:border-ensureGold focus:outline-none">
+                  <option value="Commercial Office / Fit-Out">Commercial Office / Fit-Out</option>
+                  <option value="Strata / Multi-Residential Complex">Strata / Multi-Residential Complex</option>
+                  <option value="Retail / Hospitality Venue">Retail / Hospitality Venue</option>
+                  <option value="Industrial / Warehouse Coating">Industrial / Warehouse Coating</option>
+                  <option value="Luxury Residential">Luxury Residential</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-xs font-bold uppercase tracking-wider text-gray-300 mb-2">Preferred Schedule</label>
+                <select id="q-schedule"
+                  class="w-full bg-darkBg border border-borderDark px-4 py-3 text-sm text-white focus:border-ensureGold focus:outline-none">
+                  <option value="Standard Business Hours">Standard Business Hours</option>
+                  <option value="After-Hours / Night Shift">After-Hours / Night Shift</option>
+                  <option value="Weekend Execution">Weekend Execution</option>
+                  <option value="Flexible / Site Inspection First">Flexible / Site Inspection First</option>
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wider text-gray-300 mb-2">Project Scope &amp; Specifications *</label>
+              <textarea id="q-details" rows="4" required
+                placeholder="Describe site location, approximate m², interior/exterior scope, and preferred timeline..."
+                class="w-full bg-darkBg border border-borderDark px-4 py-3 text-sm text-white focus:border-ensureGold focus:outline-none"></textarea>
+            </div>
+
+            <button type="submit"
+              class="w-full py-4 bg-ensureGold text-darkBg font-extrabold text-xs uppercase tracking-[0.2em] hover:bg-yellow-400 transition gold-glow">
+              SEND WORK REQUEST VIA EMAIL
+            </button>
+            <p id="quote-feedback" class="hidden text-xs text-ensureGold text-center pt-1"></p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-darkBg border-t border-borderDark py-14">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-8">
+      <!-- Footer Brand Lockup -->
+      <div class="flex items-center gap-3">
+        <div id="footer-logo-svg-wrap">
+          <svg id="footer-logo-svg" width="44" height="44" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M22 50 V22 H98 V98 H56" stroke="#F2B705" stroke-width="6.5" stroke-linecap="square" stroke-linejoin="miter"/>
+            <path d="M46 43 H74 V52 H56 V56.5 H71 V65 H56 V69.5 H74 V78.5 H46 Z" fill="#F2B705"/>
+          </svg>
+        </div>
+        <img id="footer-logo-img" src="" alt="ENSURE Logo" class="hidden object-contain" style="height: 44px;" />
+        <div id="footer-logo-text" class="flex flex-col justify-center leading-none">
+          <span id="footer-brand-main" class="text-ensureGold font-extrabold tracking-[0.14em]" style="font-size: 22px;">ENSURE</span>
+          <span id="footer-brand-sub1" class="text-ensureGold/90 font-semibold tracking-[0.23em] text-[9px] mt-1">PAINTING &amp;</span>
+          <span id="footer-brand-sub2" class="text-ensureGold/90 font-semibold tracking-[0.21em] text-[9px] mt-0.5">DECORATING</span>
+        </div>
+      </div>
+
+      <div class="text-center md:text-right space-y-1.5">
+        <div class="text-xs font-bold tracking-[0.2em] text-ensureGold uppercase">PREMIUM FINISHES, PROFESSIONAL CARE</div>
+        <!-- Secret 5-Click Admin Trigger on Copyright Text -->
+        <p id="secret-admin-trigger" onclick="handleSecretCopyrightClick()"
+          class="text-xs text-slateText select-none cursor-default">
+          &copy; 2026 ENSURE PAINTING &amp; DECORATING PTY LTD. All Rights Reserved.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==================== MODALS ==================== -->
+
+  <!-- 1. LIGHTBOX MODAL (Photo & Video Viewer) -->
+  <div id="lightbox-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/90 backdrop-blur-sm p-4" onclick="closeLightbox(event)">
+    <div class="relative max-w-4xl w-full bg-cardBg border border-borderDark p-4 sm:p-6" onclick="event.stopPropagation()">
+      <button type="button" onclick="forceCloseLightbox()" class="absolute -top-11 right-0 text-white hover:text-ensureGold text-xs font-bold uppercase tracking-widest flex items-center gap-1">
+        Close &times;
+      </button>
+      <div id="lightbox-media-container" class="w-full max-h-[70vh] flex items-center justify-center bg-black overflow-hidden"></div>
+      <div class="mt-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+        <div>
+          <span id="lightbox-cat" class="text-[11px] font-bold uppercase tracking-widest text-ensureGold"></span>
+          <h4 id="lightbox-title" class="text-lg font-bold text-white"></h4>
+          <p id="lightbox-desc" class="text-xs text-slateText mt-0.5"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. ADMIN PIN AUTHENTICATION MODAL -->
+  <div id="pin-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/85 backdrop-blur-sm p-4">
+    <div class="bg-cardBg border border-ensureGold/60 max-w-sm w-full p-6 sm:p-8 shadow-2xl">
+      <span class="text-ensureGold text-xs font-bold uppercase tracking-widest">Owner Access</span>
+      <h3 class="text-xl font-bold text-white mt-1">Enter Admin PIN</h3>
+      <p class="text-xs text-slateText mt-1.5">Unlock logo customizer, Before/After slider editor, and media upload controls.</p>
+      <form onsubmit="verifyAdminPin(event)" class="mt-5 space-y-4">
+        <input id="pin-input" type="password" maxlength="12" placeholder="Enter PIN (Default: 2026)" required
+          class="w-full bg-darkBg border border-borderDark px-4 py-3 text-center text-lg tracking-[0.3em] text-white focus:border-ensureGold focus:outline-none" />
+        <p id="pin-error" class="hidden text-xs text-red-400 text-center">Incorrect PIN. Please try again.</p>
+        <div class="flex gap-2.5">
+          <button type="button" onclick="closePinModal()" class="w-1/2 py-2.5 border border-borderDark text-xs font-bold uppercase tracking-wider text-gray-300 hover:text-white">
+            Cancel
+          </button>
+          <button type="submit" class="w-1/2 py-2.5 bg-ensureGold text-darkBg text-xs font-bold uppercase tracking-wider hover:bg-yellow-400">
+            Unlock
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 3. CHANGE ADMIN PIN MODAL -->
+  <div id="pin-change-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/85 backdrop-blur-sm p-4">
+    <div class="bg-cardBg border border-borderDark max-w-sm w-full p-6 shadow-2xl">
+      <h3 class="text-lg font-bold text-white">Change Admin PIN</h3>
+      <form onsubmit="saveNewPin(event)" class="mt-4 space-y-4">
+        <input id="new-pin-input" type="text" minlength="4" maxlength="12" placeholder="New PIN (4-12 chars)" required
+          class="w-full bg-darkBg border border-borderDark px-4 py-2.5 text-sm text-white focus:border-ensureGold focus:outline-none" />
+        <div class="flex gap-2.5">
+          <button type="button" onclick="closePinChangeModal()" class="w-1/2 py-2 border border-borderDark text-xs font-bold uppercase text-gray-300">Cancel</button>
+          <button type="submit" class="w-1/2 py-2 bg-ensureGold text-darkBg text-xs font-bold uppercase">Save PIN</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 4. LOGO CUSTOMIZER MODAL (With Live Preview) -->
+  <div id="logo-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/85 backdrop-blur-sm p-4">
+    <div class="bg-cardBg border border-borderDark max-w-xl w-full max-h-[90vh] overflow-y-auto p-6 sm:p-8 shadow-2xl">
+      <div class="flex items-center justify-between border-b border-borderDark pb-4 mb-5">
+        <div>
+          <span class="text-ensureGold text-xs font-bold uppercase tracking-widest">Brand Identity</span>
+          <h3 class="text-xl font-bold text-white mt-0.5">Edit Logo &amp; Typography</h3>
+        </div>
+        <button type="button" onclick="closeLogoModal()" class="text-slateText hover:text-white text-2xl leading-none">&times;</button>
+      </div>
+
+      <!-- Live Preview Box -->
+      <div class="bg-darkBg border border-borderDark p-5 mb-6 flex items-center justify-center">
+        <div id="logo-live-preview" class="flex items-center" style="gap: 10px;">
+          <div id="preview-svg-wrap">
+            <svg id="preview-logo-svg" width="48" height="48" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M22 50 V22 H98 V98 H56" stroke="#F2B705" stroke-width="6.5" stroke-linecap="square" stroke-linejoin="miter"/>
+              <path d="M46 43 H74 V52 H56 V56.5 H71 V65 H56 V69.5 H74 V78.5 H46 Z" fill="#F2B705"/>
+            </svg>
+          </div>
+          <img id="preview-logo-img" src="" alt="Preview" class="hidden object-contain" style="height: 48px;" />
+          <div id="preview-logo-text" class="flex flex-col justify-center leading-none">
+            <span id="preview-brand-main" class="text-ensureGold font-extrabold tracking-[0.14em]" style="font-size: 24px;">ENSURE</span>
+            <span id="preview-brand-sub1" class="text-ensureGold/90 font-semibold tracking-[0.23em] text-[9.5px] mt-1">PAINTING &amp;</span>
+            <span id="preview-brand-sub2" class="text-ensureGold/90 font-semibold tracking-[0.21em] text-[9.5px] mt-0.5">DECORATING</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="space-y-4 text-xs">
+        <div>
+          <label class="block font-bold uppercase tracking-wider text-gray-300 mb-1.5">Upload Custom Logo Image (PNG / JPG / SVG)</label>
+          <input type="file" accept="image/*" onchange="handleLogoFileUpload(event)"
+            class="block w-full text-slateText file:mr-3 file:py-2 file:px-3 file:border-0 file:font-bold file:bg-ensureGold file:text-darkBg cursor-pointer" />
+        </div>
+
+        <div class="flex flex-wrap gap-4 pt-1">
+          <label class="inline-flex items-center gap-2 text-gray-300 cursor-pointer">
+            <input id="logo-blend-check" type="checkbox" onchange="updateLogoPreview()" class="accent-ensureGold" />
+            <span>Blend Black Background (Transparent mode)</span>
+          </label>
+          <label class="inline-flex items-center gap-2 text-gray-300 cursor-pointer">
+            <input id="logo-hide-text-check" type="checkbox" onchange="updateLogoPreview()" class="accent-ensureGold" />
+            <span>Hide Adjacent Text (Use image only)</span>
+          </label>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="block font-bold uppercase text-gray-300 mb-1">Logo Height: <span id="val-logo-height">48</span>px</label>
+            <input id="logo-height-slider" type="range" min="32" max="96" value="48" oninput="updateLogoPreview()" class="w-full accent-ensureGold" />
+          </div>
+          <div>
+            <label class="block font-bold uppercase text-gray-300 mb-1">Icon-Text Gap: <span id="val-logo-gap">10</span>px</label>
+            <input id="logo-gap-slider" type="range" min="0" max="28" value="10" oninput="updateLogoPreview()" class="w-full accent-ensureGold" />
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="block font-bold uppercase text-gray-300 mb-1">Main Title</label>
+            <input id="logo-main-input" type="text" value="ENSURE" oninput="updateLogoPreview()"
+              class="w-full bg-darkBg border border-borderDark px-3 py-2 text-white focus:border-ensureGold focus:outline-none" />
+          </div>
+          <div>
+            <label class="block font-bold uppercase text-gray-300 mb-1">Title Size: <span id="val-text-size">24</span>px</label>
+            <input id="logo-text-size-slider" type="range" min="16" max="38" value="24" oninput="updateLogoPreview()" class="w-full accent-ensureGold" />
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="block font-bold uppercase text-gray-300 mb-1">Subtitle Line 1</label>
+            <input id="logo-sub1-input" type="text" value="PAINTING &" oninput="updateLogoPreview()"
+              class="w-full bg-darkBg border border-borderDark px-3 py-2 text-white focus:border-ensureGold focus:outline-none" />
+          </div>
+          <div>
+            <label class="block font-bold uppercase text-gray-300 mb-1">Subtitle Line 2</label>
+            <input id="logo-sub2-input" type="text" value="DECORATING" oninput="updateLogoPreview()"
+              class="w-full bg-darkBg border border-borderDark px-3 py-2 text-white focus:border-ensureGold focus:outline-none" />
+          </div>
+        </div>
+
+        <div>
+          <label class="block font-bold uppercase text-gray-300 mb-1">Text Color</label>
+          <select id="logo-color-select" onchange="updateLogoPreview()"
+            class="w-full bg-darkBg border border-borderDark px-3 py-2 text-white focus:border-ensureGold focus:outline-none">
+            <option value="#F2B705">Ensure Gold (#F2B705)</option>
+            <option value="#FFFFFF">Crisp White (#FFFFFF)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="flex items-center justify-between border-t border-borderDark pt-5 mt-6">
+        <button type="button" onclick="resetLogoSettings()" class="px-4 py-2 border border-borderDark text-slateText hover:text-white text-xs font-bold uppercase">
+          Reset Default
+        </button>
+        <div class="flex gap-2.5">
+          <button type="button" onclick="closeLogoModal()" class="px-4 py-2 border border-borderDark text-white text-xs font-bold uppercase">Cancel</button>
+          <button type="button" onclick="saveLogoSettings()" class="px-5 py-2 bg-ensureGold text-darkBg text-xs font-bold uppercase hover:bg-yellow-400">Save &amp; Apply</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. BEFORE / AFTER SLIDER CUSTOMIZER MODAL -->
+  <div id="ba-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/85 backdrop-blur-sm p-4">
+    <div class="bg-cardBg border border-borderDark max-w-xl w-full max-h-[90vh] overflow-y-auto p-6 sm:p-8 shadow-2xl">
+      <div class="flex items-center justify-between border-b border-borderDark pb-4 mb-5">
+        <div>
+          <span class="text-ensureGold text-xs font-bold uppercase tracking-widest">Admin Control</span>
+          <h3 class="text-xl font-bold text-white mt-0.5">Edit Before / After Slider</h3>
+        </div>
+        <button type="button" onclick="closeBaModal()" class="text-slateText hover:text-white text-2xl leading-none">&times;</button>
+      </div>
+
+      <div class="space-y-4">
+        <div>
+          <label class="block text-xs font-bold uppercase tracking-wider text-gray-300 mb-1">Slider Title</label>
+          <input id="ba-input-title" type="text"
+            class="w-full bg-darkBg border border-borderDark px-3.5 py-2.5 text-sm text-white focus:border-ensureGold focus:outline-none" />
+        </div>
+        <div>
+          <label class="block text-xs font-bold uppercase tracking-wider text-gray-300 mb-1">Caption / Description</label>
+          <input id="ba-input-caption" type="text"
+            class="w-full bg-darkBg border border-borderDark px-3.5 py-2.5 text-sm text-white focus:border-ensureGold focus:outline-none" />
+        </div>
+
+        <div class="p-4 bg-darkBg border border-borderDark space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold uppercase tracking-wider text-white">1. Before Photo (Pre-Treatment)</span>
+            <img id="ba-preview-before" src="" alt="Before Preview" class="w-16 h-10 object-cover border border-borderDark" />
+          </div>
+          <input type="file" accept="image/*" onchange="handleBaFile(event, 'before')"
+            class="block w-full text-xs text-slateText file:mr-3 file:py-1.5 file:px-3 file:border-0 file:text-xs file:font-bold file:bg-ensureGold file:text-darkBg cursor-pointer" />
+          <input id="ba-url-before" type="text" placeholder="Or paste Before image URL..."
+            oninput="document.getElementById('ba-preview-before').src = this.value"
+            class="w-full bg-cardBg border border-borderDark px-3 py-2 text-xs text-white focus:border-ensureGold focus:outline-none" />
+        </div>
+
+        <div class="p-4 bg-darkBg border border-borderDark space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold uppercase tracking-wider text-ensureGold">2. After Photo (Finished Coating)</span>
+            <img id="ba-preview-after" src="" alt="After Preview" class="w-16 h-10 object-cover border border-ensureGold/50" />
+          </div>
+          <input type="file" accept="image/*" onchange="handleBaFile(event, 'after')"
+            class="block w-full text-xs text-slateText file:mr-3 file:py-1.5 file:px-3 file:border-0 file:text-xs file:font-bold file:bg-ensureGold file:text-darkBg cursor-pointer" />
+          <input id="ba-url-after" type="text" placeholder="Or paste After image URL..."
+            oninput="document.getElementById('ba-preview-after').src = this.value"
+            class="w-full bg-cardBg border border-borderDark px-3 py-2 text-xs text-white focus:border-ensureGold focus:outline-none" />
+        </div>
+      </div>
+
+      <div class="flex items-center justify-between border-t border-borderDark pt-5 mt-6">
+        <button type="button" onclick="resetBaSettings()" class="px-4 py-2 border border-borderDark text-slateText hover:text-white text-xs font-bold uppercase">
+          Reset Default
+        </button>
+        <div class="flex gap-2.5">
+          <button type="button" onclick="closeBaModal()" class="px-4 py-2 border border-borderDark text-white text-xs font-bold uppercase">Cancel</button>
+          <button type="button" onclick="saveBaSettings()" class="px-5 py-2 bg-ensureGold text-darkBg text-xs font-bold uppercase hover:bg-yellow-400">Save &amp; Apply</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. UPLOAD PROJECT MEDIA MODAL -->
+  <div id="upload-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/85 backdrop-blur-sm p-4">
+    <div class="bg-cardBg border border-borderDark max-w-lg w-full max-h-[90vh] overflow-y-auto p-6 sm:p-8 shadow-2xl">
+      <div class="flex items-center justify-between border-b border-borderDark pb-4 mb-5">
+        <div>
+          <span class="text-ensureGold text-xs font-bold uppercase tracking-widest">Portfolio Manager</span>
+          <h3 class="text-xl font-bold text-white mt-0.5">Upload Project Photo or Video</h3>
+        </div>
+        <button type="button" onclick="closeUploadModal()" class="text-slateText hover:text-white text-2xl leading-none">&times;</button>
+      </div>
+
+      <form onsubmit="addGalleryProject(event)" class="space-y-4 text-xs">
+        <div>
+          <label class="block font-bold uppercase text-gray-300 mb-1">Project Title *</label>
+          <input id="up-title" type="text" required placeholder="e.g., Barangaroo Corporate Tower Lobby"
+            class="w-full bg-darkBg border border-borderDark px-3.5 py-2.5 text-sm text-white focus:border-ensureGold focus:outline-none" />
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block font-bold uppercase text-gray-300 mb-1">Category</label>
+            <select id="up-category" class="w-full bg-darkBg border border-borderDark px-3 py-2.5 text-white focus:border-ensureGold focus:outline-none">
+              <option value="commercial">Commercial</option>
+              <option value="strata">Strata &amp; Exterior</option>
+              <option value="video">Video Walkthrough</option>
+            </select>
+          </div>
+          <div>
+            <label class="block font-bold uppercase text-gray-300 mb-1">Media Type</label>
+            <select id="up-type" class="w-full bg-darkBg border border-borderDark px-3 py-2.5 text-white focus:border-ensureGold focus:outline-none">
+              <option value="image">Photo</option>
+              <option value="video">Video (MP4 / WebM)</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label class="block font-bold uppercase text-gray-300 mb-1">Select Local File (Photo or Video)</label>
+          <input id="up-file" type="file" accept="image/*,video/*" onchange="handleMediaFileUpload(event)"
+            class="block w-full text-slateText file:mr-3 file:py-2 file:px-3 file:border-0 file:font-bold file:bg-ensureGold file:text-darkBg cursor-pointer" />
+        </div>
+
+        <div>
+          <label class="block font-bold uppercase text-gray-300 mb-1">Or Media URL *</label>
+          <input id="up-url" type="text" required placeholder="https://..."
+            class="w-full bg-darkBg border border-borderDark px-3.5 py-2.5 text-white focus:border-ensureGold focus:outline-none" />
+        </div>
+
+        <div>
+          <label class="block font-bold uppercase text-gray-300 mb-1">Description / Coating Spec</label>
+          <input id="up-desc" type="text" placeholder="e.g., Dulux Wash&Wear Low Sheen + 2-Pack Feature Columns"
+            class="w-full bg-darkBg border border-borderDark px-3.5 py-2.5 text-white focus:border-ensureGold focus:outline-none" />
+        </div>
+
+        <div class="flex justify-end gap-2.5 pt-4 border-t border-borderDark">
+          <button type="button" onclick="closeUploadModal()" class="px-4 py-2 border border-borderDark text-white font-bold uppercase">Cancel</button>
+          <button type="submit" class="px-5 py-2 bg-ensureGold text-darkBg font-bold uppercase hover:bg-yellow-400">Publish to Gallery</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==================== JAVASCRIPT ==================== -->
+  <script>
+    /* -------------------- 1. HERO CANVAS BACKGROUND -------------------- */
+    (function initHeroCanvas() {
+      const canvas = document.getElementById('paintCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      let width, height;
+      let mouse = { x: -1000, y: -1000 };
+
+      function resize() {
+        width = canvas.width = canvas.offsetWidth;
+        height = canvas.height = canvas.offsetHeight;
+      }
+      window.addEventListener('resize', resize);
+      resize();
+
+      window.addEventListener('mousemove', (e) => {
+        const rect = canvas.getBoundingClientRect();
+        mouse.x = e.clientX - rect.left;
+        mouse.y = e.clientY - rect.top;
+      });
+
+      const strokes = Array.from({ length: 18 }, (_, i) => ({
+        x: Math.random() * 1400,
+        y: Math.random() * 800,
+        w: 180 + Math.random() * 260,
+        h: 2 + Math.random() * 3,
+        speed: 0.15 + Math.random() * 0.25,
+        gold: i % 4 === 0
+      }));
+
+      function draw() {
+        ctx.clearRect(0, 0, width, height);
+
+        // Subtle architectural grid
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.025)';
+        ctx.lineWidth = 1;
+        const step = 80;
+        for (let x = 0; x < width; x += step) {
+          ctx.beginPath();
+          ctx.moveTo(x, 0);
+          ctx.lineTo(x, height);
+          ctx.stroke();
+        }
+
+        // Subtle animated brush sheen lines
+        strokes.forEach((s) => {
+          s.x += s.speed;
+          if (s.x > width + 100) s.x = -s.w;
+          ctx.fillStyle = s.gold ? 'rgba(242, 183, 5, 0.08)' : 'rgba(255, 255, 255, 0.03)';
+          ctx.fillRect(s.x, s.y % height, s.w, s.h);
+        });
+
+        // Mouse spotlight glow
+        if (mouse.x > 0 && mouse.y > 0) {
+          const grad = ctx.createRadialGradient(mouse.x, mouse.y, 10, mouse.x, mouse.y, 260);
+          grad.addColorStop(0, 'rgba(242, 183, 5, 0.11)');
+          grad.addColorStop(1, 'rgba(242, 183, 5, 0)');
+          ctx.fillStyle = grad;
+          ctx.fillRect(0, 0, width, height);
+        }
+
+        requestAnimationFrame(draw);
+      }
+      draw();
+    })();
+
+    /* -------------------- 2. MOBILE MENU -------------------- */
+    function toggleMobileMenu() {
+      document.getElementById('mobile-menu').classList.toggle('hidden');
+    }
+    function closeMobileMenu() {
+      document.getElementById('mobile-menu').classList.add('hidden');
+    }
+
+    /* -------------------- 3. VISUALIZER LOGIC -------------------- */
+    let selectedColorName = 'Dulux Lexicon Quarter';
+    let selectedSheenName = 'Low-Sheen Commercial';
+
+    function selectPaintColor(name, hex, btn) {
+      selectedColorName = name;
+      document.getElementById('wall-tint-overlay').style.backgroundColor = hex;
+      document.querySelectorAll('.color-swatch-btn').forEach((el) => {
+        el.classList.remove('border-2', 'border-ensureGold');
+        el.classList.add('border', 'border-borderDark');
+      });
+      btn.classList.remove('border', 'border-borderDark');
+      btn.classList.add('border-2', 'border-ensureGold');
+      updateSpecLabel();
+    }
+
+    function selectSheen(sheenName, opacityVal, note, btn) {
+      selectedSheenName = sheenName;
+      document.getElementById('wall-sheen-overlay').style.opacity = opacityVal;
+      document.getElementById('sheen-note').textContent = note;
+      document.querySelectorAll('.sheen-btn').forEach((el) => {
+        el.classList.remove('border-ensureGold', 'text-ensureGold');
+        el.classList.add('border-borderDark', 'text-gray-300');
+      });
+      btn.classList.remove('border-borderDark', 'text-gray-300');
+      btn.classList.add('border-ensureGold', 'text-ensureGold');
+      updateSpecLabel();
+    }
+
+    function updateSpecLabel() {
+      document.getElementById('active-spec-label').textContent = `${selectedColorName} — ${selectedSheenName}`;
+    }
+
+    function applySpecToQuote() {
+      const details = document.getElementById('q-details');
+      const specLine = `[Preferred Spec: ${selectedColorName} / ${selectedSheenName}]\n`;
+      if (!details.value.includes(specLine)) {
+        details.value = specLine + details.value;
+      }
+      document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    /* -------------------- 4. BEFORE / AFTER SLIDER -------------------- */
+    (function initBeforeAfterSlider() {
+      const container = document.getElementById('ba-container');
+      const beforeWrap = document.getElementById('ba-before-wrapper');
+      const handle = document.getElementById('ba-handle');
+      if (!container || !beforeWrap || !handle) return;
+
+      let dragging = false;
+
+      function updatePosition(clientX) {
+        const rect = container.getBoundingClientRect();
+        let pos = ((clientX - rect.left) / rect.width) * 100;
+        pos = Math.max(2, Math.min(98, pos));
+        beforeWrap.style.clipPath = `inset(0 ${100 - pos}% 0 0)`;
+        handle.style.left = `${pos}%`;
+      }
+
+      container.addEventListener('mousedown', (e) => {
+        dragging = true;
+        updatePosition(e.clientX);
+      });
+      window.addEventListener('mousemove', (e) => {
+        if (dragging) updatePosition(e.clientX);
+      });
+      window.addEventListener('mouseup', () => {
+        dragging = false;
+      });
+
+      container.addEventListener('touchstart', (e) => {
+        dragging = true;
+        if (e.touches[0]) updatePosition(e.touches[0].clientX);
+      }, { passive: true });
+      window.addEventListener('touchmove', (e) => {
+        if (dragging && e.touches[0]) updatePosition(e.touches[0].clientX);
+      }, { passive: true });
+      window.addEventListener('touchend', () => {
+        dragging = false;
+      });
+    })();
+
+    /* -------------------- 5. HIDDEN ADMIN SYSTEM (PIN: 2026) -------------------- */
+    const ADMIN_PIN_KEY = 'ensure_admin_pin_v1';
+    const ADMIN_SESSION_KEY = 'ensure_admin_active_v1';
+    let isAdmin = sessionStorage.getItem(ADMIN_SESSION_KEY) === 'true';
+    let clickCount = 0;
+    let clickTimer = null;
+
+    function getStoredPin() {
+      return localStorage.getItem(ADMIN_PIN_KEY) || '2026';
+    }
+
+    function handleSecretCopyrightClick() {
+      clickCount++;
+      clearTimeout(clickTimer);
+      clickTimer = setTimeout(() => { clickCount = 0; }, 2500);
+      if (clickCount >= 5) {
+        clickCount = 0;
+        if (isAdmin) return;
+        openPinModal();
+      }
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key.toLowerCase() === 'e') {
+        e.preventDefault();
+        if (!isAdmin) openPinModal();
+      }
+    });
+
+    function openPinModal() {
+      document.getElementById('pin-error').classList.add('hidden');
+      document.getElementById('pin-input').value = '';
+      const m = document.getElementById('pin-modal');
+      m.classList.remove('hidden');
+      m.classList.add('flex');
+      setTimeout(() => document.getElementById('pin-input').focus(), 50);
+    }
+
+    function closePinModal() {
+      const m = document.getElementById('pin-modal');
+      m.classList.add('hidden');
+      m.classList.remove('flex');
+    }
+
+    function verifyAdminPin(e) {
+      e.preventDefault();
+      const entered = document.getElementById('pin-input').value.trim();
+      if (entered === getStoredPin()) {
+        isAdmin = true;
+        sessionStorage.setItem(ADMIN_SESSION_KEY, 'true');
+        closePinModal();
+        updateAdminUI();
+      } else {
+        document.getElementById('pin-error').classList.remove('hidden');
+      }
+    }
+
+    function logoutAdmin() {
+      isAdmin = false;
+      sessionStorage.removeItem(ADMIN_SESSION_KEY);
+      updateAdminUI();
+    }
+
+    function openPinChangeModal() {
+      const m = document.getElementById('pin-change-modal');
+      m.classList.remove('hidden');
+      m.classList.add('flex');
+    }
+
+    function closePinChangeModal() {
+      const m = document.getElementById('pin-change-modal');
+      m.classList.add('hidden');
+      m.classList.remove('flex');
+    }
+
+    function saveNewPin(e) {
+      e.preventDefault();
+      const val = document.getElementById('new-pin-input').value.trim();
+      if (val.length >= 4) {
+        localStorage.setItem(ADMIN_PIN_KEY, val);
+        closePinChangeModal();
+        alert('Admin PIN updated successfully.');
+      }
+    }
+
+    function updateAdminUI() {
+      const statusBar = document.getElementById('admin-status-bar');
+      const editLogoBtn = document.getElementById('admin-edit-logo-btn');
+      const editBaBtn = document.getElementById('admin-edit-ba-btn');
+      const uploadBtn = document.getElementById('admin-upload-btn');
+
+      if (statusBar) statusBar.classList.toggle('hidden', !isAdmin);
+
+      [editLogoBtn, editBaBtn, uploadBtn].forEach((btn) => {
+        if (!btn) return;
+        btn.classList.toggle('hidden', !isAdmin);
+        btn.classList.toggle('inline-flex', isAdmin);
+      });
+
+      renderGallery();
+    }
+
+    /* -------------------- 6. LOGO CUSTOMIZER -------------------- */
+    const LOGO_STORAGE_KEY = 'ensure_logo_cfg_v1';
+    const DEFAULT_LOGO_CFG = {
+      customImg: '',
+      blendScreen: false,
+      hideText: false,
+      height: 48,
+      gap: 10,
+      mainText: 'ENSURE',
+      sub1: 'PAINTING &',
+      sub2: 'DECORATING',
+      textSize: 24,
+      textColor: '#F2B705'
+    };
+    let logoCfg = { ...DEFAULT_LOGO_CFG };
+
+    function loadLogoSettings() {
+      try {
+        const saved = localStorage.getItem(LOGO_STORAGE_KEY);
+        if (saved) logoCfg = { ...DEFAULT_LOGO_CFG, ...JSON.parse(saved) };
+      } catch (e) {}
+      applyLogoToDOM();
+    }
+
+    function applyLogoToDOM() {
+      const pairs = [
+        {
+          link: document.getElementById('header-logo-link'),
+          svgWrap: document.getElementById('header-logo-svg-wrap'),
+          svg: document.getElementById('header-logo-svg'),
+          img: document.getElementById('header-logo-img'),
+          textWrap: document.getElementById('header-logo-text'),
+          main: document.getElementById('header-brand-main'),
+          sub1: document.getElementById('header-brand-sub1'),
+          sub2: document.getElementById('header-brand-sub2'),
+          scale: 1
+        },
+        {
+          link: document.getElementById('footer-logo-svg-wrap')?.parentElement,
+          svgWrap: document.getElementById('footer-logo-svg-wrap'),
+          svg: document.getElementById('footer-logo-svg'),
+          img: document.getElementById('footer-logo-img'),
+          textWrap: document.getElementById('footer-logo-text'),
+          main: document.getElementById('footer-brand-main'),
+          sub1: document.getElementById('footer-brand-sub1'),
+          sub2: document.getElementById('footer-brand-sub2'),
+          scale: 0.9
+        }
+      ];
+
+      pairs.forEach((p) => {
+        if (!p.link) return;
+        p.link.style.gap = `${logoCfg.gap}px`;
+        const h = Math.round(logoCfg.height * p.scale);
+
+        if (logoCfg.customImg) {
+          p.svgWrap.classList.add('hidden');
+          p.img.classList.remove('hidden');
+          p.img.src = logoCfg.customImg;
+          p.img.style.height = `${h}px`;
+          p.img.classList.toggle('blend-screen', logoCfg.blendScreen);
+        } else {
+          p.svgWrap.classList.remove('hidden');
+          p.img.classList.add('hidden');
+          p.svg.setAttribute('width', h);
+          p.svg.setAttribute('height', h);
+        }
+
+        p.textWrap.classList.toggle('hidden', logoCfg.hideText);
+        p.main.textContent = logoCfg.mainText;
+        p.sub1.textContent = logoCfg.sub1;
+        p.sub2.textContent = logoCfg.sub2;
+        p.main.style.fontSize = `${Math.round(logoCfg.textSize * p.scale)}px`;
+        p.main.style.color = logoCfg.textColor;
+      });
+    }
+
+    function openLogoModal() {
+      document.getElementById('logo-blend-check').checked = logoCfg.blendScreen;
+      document.getElementById('logo-hide-text-check').checked = logoCfg.hideText;
+      document.getElementById('logo-height-slider').value = logoCfg.height;
+      document.getElementById('logo-gap-slider').value = logoCfg.gap;
+      document.getElementById('logo-main-input').value = logoCfg.mainText;
+      document.getElementById('logo-sub1-input').value = logoCfg.sub1;
+      document.getElementById('logo-sub2-input').value = logoCfg.sub2;
+      document.getElementById('logo-text-size-slider').value = logoCfg.textSize;
+      document.getElementById('logo-color-select').value = logoCfg.textColor;
+      updateLogoPreview();
+
+      const m = document.getElementById('logo-modal');
+      m.classList.remove('hidden');
+      m.classList.add('flex');
+    }
+
+    function closeLogoModal() {
+      const m = document.getElementById('logo-modal');
+      m.classList.add('hidden');
+      m.classList.remove('flex');
+    }
+
+    function handleLogoFileUpload(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (ev) => {
+        logoCfg.customImg = ev.target.result;
+        updateLogoPreview();
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function updateLogoPreview() {
+      const h = parseInt(document.getElementById('logo-height-slider').value, 10);
+      const gap = parseInt(document.getElementById('logo-gap-slider').value, 10);
+      const size = parseInt(document.getElementById('logo-text-size-slider').value, 10);
+      const blend = document.getElementById('logo-blend-check').checked;
+      const hideText = document.getElementById('logo-hide-text-check').checked;
+      const main = document.getElementById('logo-main-input').value;
+      const sub1 = document.getElementById('logo-sub1-input').value;
+      const sub2 = document.getElementById('logo-sub2-input').value;
+      const color = document.getElementById('logo-color-select').value;
+
+      document.getElementById('val-logo-height').textContent = h;
+      document.getElementById('val-logo-gap').textContent = gap;
+      document.getElementById('val-text-size').textContent = size;
+
+      const previewWrap = document.getElementById('logo-live-preview');
+      previewWrap.style.gap = `${gap}px`;
+
+      const pSvgWrap = document.getElementById('preview-svg-wrap');
+      const pSvg = document.getElementById('preview-logo-svg');
+      const pImg = document.getElementById('preview-logo-img');
+      if (logoCfg.customImg) {
+        pSvgWrap.classList.add('hidden');
+        pImg.classList.remove('hidden');
+        pImg.src = logoCfg.customImg;
+        pImg.style.height = `${h}px`;
+        pImg.classList.toggle('blend-screen', blend);
+      } else {
+        pSvgWrap.classList.remove('hidden');
+        pImg.classList.add('hidden');
+        pSvg.setAttribute('width', h);
+        pSvg.setAttribute('height', h);
+      }
+
+      const pText = document.getElementById('preview-logo-text');
+      pText.classList.toggle('hidden', hideText);
+      const pMain = document.getElementById('preview-brand-main');
+      pMain.textContent = main;
+      pMain.style.fontSize = `${size}px`;
+      pMain.style.color = color;
+      document.getElementById('preview-brand-sub1').textContent = sub1;
+      document.getElementById('preview-brand-sub2').textContent = sub2;
+    }
+
+    function saveLogoSettings() {
+      logoCfg.blendScreen = document.getElementById('logo-blend-check').checked;
+      logoCfg.hideText = document.getElementById('logo-hide-text-check').checked;
+      logoCfg.height = parseInt(document.getElementById('logo-height-slider').value, 10);
+      logoCfg.gap = parseInt(document.getElementById('logo-gap-slider').value, 10);
+      logoCfg.mainText = document.getElementById('logo-main-input').value;
+      logoCfg.sub1 = document.getElementById('logo-sub1-input').value;
+      logoCfg.sub2 = document.getElementById('logo-sub2-input').value;
+      logoCfg.textSize = parseInt(document.getElementById('logo-text-size-slider').value, 10);
+      logoCfg.textColor = document.getElementById('logo-color-select').value;
+
+      try {
+        localStorage.setItem(LOGO_STORAGE_KEY, JSON.stringify(logoCfg));
+      } catch (e) {
+        alert('Logo image size exceeds browser storage limit. Please use a smaller image.');
+      }
+      applyLogoToDOM();
+      closeLogoModal();
+    }
+
+    function resetLogoSettings() {
+      localStorage.removeItem(LOGO_STORAGE_KEY);
+      logoCfg = { ...DEFAULT_LOGO_CFG };
+      applyLogoToDOM();
+      closeLogoModal();
+    }
+
+    /* -------------------- 7. BEFORE / AFTER CUSTOMIZER -------------------- */
+    const BA_STORAGE_KEY = 'ensure_ba_slider_v1';
+    const DEFAULT_BA_DATA = {
+      title: 'Interactive Transformation Slider',
+      caption: 'Drag the handle left or right to compare pre-treatment substrate vs. finished architectural coating.',
+      beforeImg: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1600&q=85',
+      afterImg: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1600&q=85'
+    };
+    let currentBaData = { ...DEFAULT_BA_DATA };
+
+    function loadBaSettings() {
+      try {
+        const saved = localStorage.getItem(BA_STORAGE_KEY);
+        if (saved) currentBaData = { ...DEFAULT_BA_DATA, ...JSON.parse(saved) };
+      } catch (e) {}
+      applyBaToDOM();
+    }
+
+    function applyBaToDOM() {
+      const titleEl = document.getElementById('ba-section-title');
+      const captionEl = document.getElementById('ba-section-caption');
+      const beforeEl = document.getElementById('ba-before-img');
+      const afterEl = document.getElementById('ba-after-img');
+
+      if (titleEl) {
+        titleEl.innerHTML = `<span class="w-2.5 h-2.5 bg-ensureGold inline-block"></span> ${currentBaData.title}`;
+      }
+      if (captionEl) captionEl.textContent = currentBaData.caption;
+      if (beforeEl && currentBaData.beforeImg) beforeEl.src = currentBaData.beforeImg;
+      if (afterEl && currentBaData.afterImg) afterEl.src = currentBaData.afterImg;
+    }
+
+    function openBaModal() {
+      document.getElementById('ba-input-title').value = currentBaData.title;
+      document.getElementById('ba-input-caption').value = currentBaData.caption;
+      document.getElementById('ba-url-before').value = currentBaData.beforeImg;
+      document.getElementById('ba-url-after').value = currentBaData.afterImg;
+      document.getElementById('ba-preview-before').src = currentBaData.beforeImg;
+      document.getElementById('ba-preview-after').src = currentBaData.afterImg;
+
+      const m = document.getElementById('ba-modal');
+      m.classList.remove('hidden');
+      m.classList.add('flex');
+    }
+
+    function closeBaModal() {
+      const m = document.getElementById('ba-modal');
+      m.classList.add('hidden');
+      m.classList.remove('flex');
+    }
+
+    function handleBaFile(event, type) {
+      const file = event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        const dataUrl = e.target.result;
+        if (type === 'before') {
+          document.getElementById('ba-url-before').value = dataUrl;
+          document.getElementById('ba-preview-before').src = dataUrl;
+        } else {
+          document.getElementById('ba-url-after').value = dataUrl;
+          document.getElementById('ba-preview-after').src = dataUrl;
+        }
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function saveBaSettings() {
+      currentBaData = {
+        title: document.getElementById('ba-input-title').value.trim() || DEFAULT_BA_DATA.title,
+        caption: document.getElementById('ba-input-caption').value.trim() || DEFAULT_BA_DATA.caption,
+        beforeImg: document.getElementById('ba-url-before').value.trim() || DEFAULT_BA_DATA.beforeImg,
+        afterImg: document.getElementById('ba-url-after').value.trim() || DEFAULT_BA_DATA.afterImg
+      };
+      try {
+        localStorage.setItem(BA_STORAGE_KEY, JSON.stringify(currentBaData));
+      } catch (e) {
+        alert('Image file size exceeds browser storage limit. Please use a compressed photo or URL.');
+      }
+      applyBaToDOM();
+      closeBaModal();
+    }
+
+    function resetBaSettings() {
+      localStorage.removeItem(BA_STORAGE_KEY);
+      currentBaData = { ...DEFAULT_BA_DATA };
+      applyBaToDOM();
+      closeBaModal();
+    }
+
+    /* -------------------- 8. PORTFOLIO GALLERY & UPLOAD -------------------- */
+    const GALLERY_STORAGE_KEY = 'ensure_gallery_items_v1';
+    const DEFAULT_PROJECTS = [
+      {
+        id: 'p1',
+        title: 'Martin Place Corporate Fit-Out',
+        category: 'commercial',
+        type: 'image',
+        url: 'https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1000&q=80',
+        desc: 'Dulux Lexicon Quarter Low-Sheen & Monument Acoustic Ceilings'
+      },
+      {
+        id: 'p2',
+        title: 'North Sydney Strata Facade Remediation',
+        category: 'strata',
+        type: 'image',
+        url: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1000&q=80',
+        desc: 'Elastomeric Membrane Weatherproofing & EWP High-Access Finish'
+      },
+      {
+        id: 'p3',
+        title: 'Executive Boardroom & Feature Lobby',
+        category: 'commercial',
+        type: 'image',
+        url: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1000&q=80',
+        desc: 'Architectural Matte Walls & Satin Two-Pack Timber Joinery'
+      },
+      {
+        id: 'p4',
+        title: 'Eastern Suburbs Luxury Multi-Res',
+        category: 'strata',
+        type: 'image',
+        url: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1000&q=80',
+        desc: 'Full Exterior Render Coating & Balustrade Protective Enamel'
+      },
+      {
+        id: 'p5',
+        title: 'Commercial Lobby Handover Walkthrough',
+        category: 'video',
+        type: 'video',
+        url: 'https://assets.mixkit.co/videos/preview/mixkit-modern-office-building-interior-43615-large.mp4',
+        desc: 'After-Hours Zero-Disruption Commercial Refurbishment Walkthrough'
+      },
+      {
+        id: 'p6',
+        title: 'Flagship Retail Showroom Finish',
+        category: 'commercial',
+        type: 'image',
+        url: 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1000&q=80',
+        desc: 'High-Durability Scuff-Resistant Commercial Wall System'
+      }
+    ];
+
+    let galleryProjects = [];
+    let currentFilter = 'all';
+
+    function loadGalleryProjects() {
+      try {
+        const saved = localStorage.getItem(GALLERY_STORAGE_KEY);
+        galleryProjects = saved ? JSON.parse(saved) : [...DEFAULT_PROJECTS];
+      } catch (e) {
+        galleryProjects = [...DEFAULT_PROJECTS];
+      }
+      renderGallery();
+    }
+
+    function filterGallery(cat, btn) {
+      currentFilter = cat;
+      document.querySelectorAll('.gallery-filter-btn').forEach((el) => {
+        el.classList.remove('bg-ensureGold', 'text-darkBg');
+        el.classList.add('bg-cardBg', 'border', 'border-borderDark', 'text-gray-300');
+      });
+      btn.classList.remove('bg-cardBg', 'border', 'border-borderDark', 'text-gray-300');
+      btn.classList.add('bg-ensureGold', 'text-darkBg');
+      renderGallery();
+    }
+
+    function renderGallery() {
+      const grid = document.getElementById('gallery-grid');
+      if (!grid) return;
+
+      const filtered = currentFilter === 'all'
+        ? galleryProjects
+        : galleryProjects.filter((item) => item.category === currentFilter);
+
+      grid.innerHTML = filtered.map((item) => `
+        <div class="group relative bg-cardBg border border-borderDark overflow-hidden hover:border-ensureGold/60 transition">
+          <div class="relative h-64 bg-black overflow-hidden cursor-pointer" onclick="openLightbox('${item.id}')">
+            ${item.type === 'video'
+              ? `<video src="${item.url}" muted loop playsinline onmouseover="this.play()" onmouseout="this.pause()" class="w-full h-full object-cover opacity-90 group-hover:scale-105 transition duration-500"></video>
+                 <span class="absolute top-3 left-3 bg-ensureGold text-darkBg text-[10px] font-extrabold px-2.5 py-1 uppercase tracking-wider">VIDEO</span>`
+              : `<img src="${item.url}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" />`
+            }
+          </div>
+          <div class="p-5 flex items-start justify-between gap-3">
+            <div class="cursor-pointer" onclick="openLightbox('${item.id}')">
+              <span class="text-[10px] font-bold uppercase tracking-widest text-ensureGold">${item.category}</span>
+              <h4 class="text-base font-bold text-white mt-0.5 group-hover:text-ensureGold transition">${item.title}</h4>
+              <p class="text-xs text-slateText mt-1">${item.desc || ''}</p>
+            </div>
+            ${isAdmin ? `
+              <button type="button" onclick="deleteProject('${item.id}')" title="Delete Project"
+                class="text-red-400 hover:text-red-300 p-1.5 border border-red-500/30 hover:bg-red-500/10 transition flex-shrink-0">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                </svg>
+              </button>
+            ` : ''}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function openUploadModal() {
+      const m = document.getElementById('upload-modal');
+      m.classList.remove('hidden');
+      m.classList.add('flex');
+    }
+
+    function closeUploadModal() {
+      const m = document.getElementById('upload-modal');
+      m.classList.add('hidden');
+      m.classList.remove('flex');
+    }
+
+    function handleMediaFileUpload(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      if (file.type.startsWith('video/')) {
+        document.getElementById('up-type').value = 'video';
+        document.getElementById('up-category').value = 'video';
+      } else {
+        document.getElementById('up-type').value = 'image';
+      }
+      const reader = new FileReader();
+      reader.onload = (ev) => {
+        document.getElementById('up-url').value = ev.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function addGalleryProject(e) {
+      e.preventDefault();
+      const newItem = {
+        id: 'proj_' + Date.now(),
+        title: document.getElementById('up-title').value.trim(),
+        category: document.getElementById('up-category').value,
+        type: document.getElementById('up-type').value,
+        url: document.getElementById('up-url').value.trim(),
+        desc: document.getElementById('up-desc').value.trim()
+      };
+      galleryProjects.unshift(newItem);
+      try {
+        localStorage.setItem(GALLERY_STORAGE_KEY, JSON.stringify(galleryProjects));
+      } catch (err) {
+        alert('File size exceeds local browser storage limit. For large videos, paste a hosted MP4 URL.');
+      }
+      e.target.reset();
+      closeUploadModal();
+      renderGallery();
+    }
+
+    function deleteProject(id) {
+      if (!confirm('Remove this project from the gallery?')) return;
+      galleryProjects = galleryProjects.filter((p) => p.id !== id);
+      localStorage.setItem(GALLERY_STORAGE_KEY, JSON.stringify(galleryProjects));
+      renderGallery();
+    }
+
+    /* -------------------- 9. LIGHTBOX -------------------- */
+    function openLightbox(id) {
+      const item = galleryProjects.find((p) => p.id === id);
+      if (!item) return;
+      const container = document.getElementById('lightbox-media-container');
+      if (item.type === 'video') {
+        container.innerHTML = `<video src="${item.url}" controls autoplay class="max-h-[68vh] w-auto"></video>`;
+      } else {
+        container.innerHTML = `<img src="${item.url}" alt="${item.title}" class="max-h-[68vh] w-auto object-contain" />`;
+      }
+      document.getElementById('lightbox-cat').textContent = item.category;
+      document.getElementById('lightbox-title').textContent = item.title;
+      document.getElementById('lightbox-desc').textContent = item.desc || '';
+
+      const m = document.getElementById('lightbox-modal');
+      m.classList.remove('hidden');
+      m.classList.add('flex');
+    }
+
+    function closeLightbox(e) {
+      if (e.target.id === 'lightbox-modal') forceCloseLightbox();
+    }
+
+    function forceCloseLightbox() {
+      document.getElementById('lightbox-media-container').innerHTML = '';
+      const m = document.getElementById('lightbox-modal');
+      m.classList.add('hidden');
+      m.classList.remove('flex');
+    }
+
+    /* -------------------- 10. EMAIL QUOTE DISPATCH -------------------- */
+    function submitQuoteEmail(e) {
+      e.preventDefault();
+      const name = document.getElementById('q-name').value.trim();
+      const company = document.getElementById('q-company').value.trim();
+      const email = document.getElementById('q-email').value.trim();
+      const phone = document.getElementById('q-phone').value.trim();
+      const sector = document.getElementById('q-sector').value;
+      const schedule = document.getElementById('q-schedule').value;
+      const details = document.getElementById('q-details').value.trim();
+
+      const subject = encodeURIComponent(`[Commercial Quote Request] ${sector} — ${company || name}`);
+      const body = encodeURIComponent(
+        `Client Name: ${name}\n` +
+        `Company / Strata: ${company || 'N/A'}\n` +
+        `Email: ${email}\n` +
+        `Phone: ${phone}\n` +
+        `Project Sector: ${sector}\n` +
+        `Preferred Schedule: ${schedule}\n\n` +
+        `Project Scope & Specifications:\n${details}`
+      );
+
+      const feedback = document.getElementById('quote-feedback');
+      feedback.textContent = 'Opening your default email client to dispatch request to info@ensurepainting.com.au...';
+      feedback.classList.remove('hidden');
+
+      window.location.href = `mailto:info@ensurepainting.com.au?subject=${subject}&body=${body}`;
+    }
+
+    /* -------------------- INITIALIZE ON LOAD -------------------- */
+    window.addEventListener('DOMContentLoaded', () => {
+      loadLogoSettings();
+      loadBaSettings();
+      loadGalleryProjects();
+      updateAdminUI();
+    });
+  </script>
+</body>
+</html>
