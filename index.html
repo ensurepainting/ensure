@@ -1,0 +1,1606 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ENSURE Painting & Decorating | Commercial & Architectural Painters Sydney</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        gold: {
+                            400: '#F5C842',
+                            500: '#F2B705',
+                            600: '#D99B04',
+                            700: '#B37D03'
+                        },
+                        charcoal: {
+                            950: '#08090A',
+                            900: '#0D0E10',
+                            800: '#141619',
+                            700: '#1F2226',
+                            600: '#2A2E35'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0D0E10;
+            color: #E2E8F0;
+            overflow-x: hidden;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0D0E10;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2A2E35;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #F2B705;
+        }
+        /* Glassmorphism utility classes */
+        .glass-panel {
+            background: rgba(20, 22, 25, 0.88);
+            backdrop-filter: blur(14px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .glass-card {
+            background: rgba(31, 34, 38, 0.65);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(242, 183, 5, 0.15);
+        }
+        .glass-card:hover {
+            border-color: rgba(242, 183, 5, 0.45);
+            box-shadow: 0 10px 30px -10px rgba(242, 183, 5, 0.2);
+        }
+        /* Image Blend Utility for Black Logos */
+        .blend-screen {
+            mix-blend-mode: screen;
+        }
+    </style>
+</head>
+<body class="bg-charcoal-900 text-slate-200 antialiased selection:bg-gold-500 selection:text-charcoal-900">
+
+    <!-- FLOATING ADMIN BAR (Hidden by default, shown when Admin is logged in) -->
+    <div id="admin-bar" class="hidden fixed top-0 left-0 right-0 z-50 bg-gold-500 text-charcoal-900 px-4 py-2 font-bold text-xs flex items-center justify-between shadow-2xl border-b border-gold-600">
+        <div class="flex items-center gap-2">
+            <span class="inline-block w-2.5 h-2.5 rounded-full bg-emerald-800 animate-ping"></span>
+            <span class="inline-block w-2.5 h-2.5 rounded-full bg-emerald-900 -ml-4"></span>
+            <span class="font-extrabold uppercase tracking-wider text-charcoal-950">ADMIN MODE ACTIVE</span>
+            <span class="hidden sm:inline text-charcoal-800 font-medium text-[11px]">(Edit logo, upload media & manage gallery unlocked)</span>
+        </div>
+        <div class="flex items-center gap-3">
+            <button onclick="openChangePinModal()" class="px-3 py-1 rounded bg-charcoal-900/10 hover:bg-charcoal-900/20 text-charcoal-950 font-bold transition-all text-[11px] uppercase tracking-wider">
+                Change PIN
+            </button>
+            <button onclick="logoutAdmin()" class="px-3 py-1 rounded bg-charcoal-900 text-gold-400 hover:bg-charcoal-950 transition-all font-bold text-[11px] uppercase tracking-wider shadow-sm">
+                Lock / Logout
+            </button>
+        </div>
+    </div>
+
+    <!-- HEADER & NAVIGATION -->
+    <header id="main-header" class="fixed top-0 left-0 right-0 z-40 glass-panel border-b border-white/10 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                
+                <!-- Logo & Edit Logo Container -->
+                <div class="flex items-center gap-3 sm:gap-4">
+                    <a href="#home" id="header-logo-container" class="flex items-center group transition-transform duration-200 hover:scale-[1.01]">
+                        <!-- Dynamic Logo Rendered by JS -->
+                    </a>
+                    
+                    <!-- EDIT LOGO BUTTON (Admin Only) -->
+                    <button id="admin-edit-logo-btn" onclick="openLogoModal()" class="admin-only hidden inline-flex items-center gap-1.5 px-3 py-1 text-xs font-semibold rounded-md bg-gold-500/15 text-gold-400 border border-gold-500/40 hover:bg-gold-500 hover:text-charcoal-900 transition-all shadow-sm">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
+                        <span>Edit Logo</span>
+                    </button>
+                </div>
+
+                <!-- Desktop Navigation Links -->
+                <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
+                    <a href="#home" class="text-white hover:text-gold-400 transition-colors">HOME</a>
+                    <a href="#about" class="text-slate-300 hover:text-gold-400 transition-colors">ABOUT ENSURE</a>
+                    <a href="#visualizer" class="text-slate-300 hover:text-gold-400 transition-colors">FINISH VISUALIZER</a>
+                    <a href="#gallery" class="text-slate-300 hover:text-gold-400 transition-colors">GALLERY</a>
+                    <a href="#contact" class="px-5 py-2.5 rounded-lg bg-gold-500 text-charcoal-900 font-extrabold hover:bg-gold-400 transition-all shadow-lg shadow-gold-500/20 hover:scale-105 active:scale-95 tracking-wide">
+                        GET A FREE QUOTE
+                    </a>
+                </nav>
+
+                <!-- Mobile Hamburger Button -->
+                <button onclick="toggleMobileMenu()" class="md:hidden p-2 rounded-lg text-slate-300 hover:text-white hover:bg-charcoal-700 focus:outline-none">
+                    <svg id="menu-icon-open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                    <svg id="menu-icon-close" class="hidden w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Drawer Menu -->
+        <div id="mobile-menu" class="hidden md:hidden border-t border-white/10 bg-charcoal-800/95 backdrop-blur-xl px-4 pt-4 pb-6 space-y-3">
+            <a href="#home" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-charcoal-700">HOME</a>
+            <a href="#about" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:bg-charcoal-700">ABOUT ENSURE</a>
+            <a href="#visualizer" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:bg-charcoal-700">FINISH VISUALIZER</a>
+            <a href="#gallery" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:bg-charcoal-700">GALLERY</a>
+            <a href="#contact" onclick="toggleMobileMenu()" class="block text-center px-4 py-3 rounded-lg bg-gold-500 text-charcoal-900 font-extrabold hover:bg-gold-400 transition-all shadow-md">
+                GET A FREE QUOTE
+            </a>
+        </div>
+    </header>
+
+    <!-- HERO SECTION WITH CANVAS BACKGROUND -->
+    <section id="home" class="relative min-h-screen pt-32 pb-20 flex items-center justify-center overflow-hidden">
+        <!-- Interactive Sheen Canvas Background -->
+        <canvas id="paintCanvas" class="absolute inset-0 w-full h-full pointer-events-auto z-0"></canvas>
+        
+        <!-- Gradient overlay -->
+        <div class="absolute inset-0 bg-gradient-to-t from-charcoal-900 via-charcoal-900/70 to-transparent z-0 pointer-events-none"></div>
+
+        <div class="relative z-10 max-w-5xl mx-auto px-4 text-center">
+            <!-- Gold Badge -->
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gold-500/10 border border-gold-500/30 text-gold-400 text-xs sm:text-sm font-semibold tracking-wider uppercase mb-8 animate-pulse">
+                <span class="w-2 h-2 rounded-full bg-gold-500"></span>
+                PREMIUM FINISHES, PROFESSIONAL CARE
+            </div>
+            
+            <!-- Headline -->
+            <h1 class="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight leading-none text-white mb-6">
+                ARCHITECTURAL PRECISION.<br>
+                <span class="text-gold-500 drop-shadow-[0_4px_25px_rgba(242,183,5,0.35)]">LASTING IMPRESSIONS.</span>
+            </h1>
+            
+            <p class="text-base sm:text-xl text-slate-300 max-w-3xl mx-auto font-light leading-relaxed mb-10">
+                Sydney's premier commercial and luxury residential painters. Dulux accredited, zero-disruption after-hours execution, and premium spec paint systems guaranteed for over 10 years.
+            </p>
+            
+            <!-- CTAs -->
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 mb-16">
+                <a href="#gallery" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-gold-500 text-charcoal-900 text-base font-extrabold hover:bg-gold-400 transition-all shadow-xl shadow-gold-500/20 transform hover:-translate-y-0.5 tracking-wider uppercase">
+                    VIEW GALLERY
+                </a>
+                <a href="#contact" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-charcoal-800 text-white border border-gold-500/40 text-base font-bold hover:bg-charcoal-700 hover:border-gold-400 transition-all tracking-wider uppercase">
+                    GET A FREE QUOTE
+                </a>
+            </div>
+
+            <!-- Trust Metrics Bar -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-4xl mx-auto pt-8 border-t border-white/10">
+                <div class="glass-card p-4 rounded-xl text-center">
+                    <div class="text-3xl font-black text-gold-500 mb-1">20Y+</div>
+                    <div class="text-xs text-slate-400 uppercase font-bold tracking-wider">Commercial Experience</div>
+                </div>
+                <div class="glass-card p-4 rounded-xl text-center">
+                    <div class="text-3xl font-black text-gold-500 mb-1">$20M+</div>
+                    <div class="text-xs text-slate-400 uppercase font-bold tracking-wider">Public Liability Insured</div>
+                </div>
+                <div class="glass-card p-4 rounded-xl text-center">
+                    <div class="text-3xl font-black text-gold-500 mb-1">24/7</div>
+                    <div class="text-xs text-slate-400 uppercase font-bold tracking-wider">Zero-Disruption Execution</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id="about" class="py-24 bg-charcoal-800/60 relative border-t border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <div class="text-gold-500 font-bold uppercase tracking-wider text-xs mb-2">Uncompromising Standards</div>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white mb-6">Built for Commercial Durability & Architectural Perfection</h2>
+                    <p class="text-slate-300 leading-relaxed mb-6">
+                        At <strong class="text-gold-400">ENSURE Painting & Decorating</strong>, we specialize in high-end commercial, strata, and luxury residential projects across Sydney. We understand that commercial repaints and high-finish specifications demand strict adherence to safety, timelines, and surface preparation.
+                    </p>
+                    <p class="text-slate-400 leading-relaxed mb-8">
+                        Our teams utilize industry-leading paint systems—including Dulux, Taubmans, and Jotun 2-pack epoxies—with strictly low-VOC and zero-odor formulas suitable for active commercial buildings, healthcare, retail spaces, and luxury residences.
+                    </p>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="glass-card p-4 rounded-xl flex items-start gap-3">
+                            <div class="p-2 rounded-lg bg-gold-500/10 text-gold-500 shrink-0">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white text-sm">WHS & SWMS Compliant</h4>
+                                <p class="text-xs text-slate-400 mt-0.5">Strict safety protocols on every site</p>
+                            </div>
+                        </div>
+                        <div class="glass-card p-4 rounded-xl flex items-start gap-3">
+                            <div class="p-2 rounded-lg bg-gold-500/10 text-gold-500 shrink-0">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white text-sm">Night & Weekend Shift</h4>
+                                <p class="text-xs text-slate-400 mt-0.5">Zero business downtime</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative">
+                    <div class="relative rounded-2xl overflow-hidden border border-gold-500/20 shadow-2xl">
+                        <img src="https://images.unsplash.com/photo-1562259949-e8e7689d7828?auto=format&fit=crop&w=1000&q=80" alt="Ensure Painting Team" class="w-full h-[420px] object-cover" onerror="this.src='https://placehold.co/800x600/141619/F2B705?text=ENSURE+Painting+Sydney'">
+                        <div class="absolute inset-0 bg-gradient-to-t from-charcoal-900 via-transparent to-transparent"></div>
+                        <div class="absolute bottom-6 left-6 right-6 p-4 glass-panel rounded-xl">
+                            <div class="flex items-center justify-between text-xs text-slate-300">
+                                <span class="font-bold text-gold-400">Dulux Accredited Contractor</span>
+                                <span>ISO 9001 Quality Assured</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SURFACE FINISH & SHEEN VISUALIZER -->
+    <section id="visualizer" class="py-24 bg-charcoal-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <div class="text-gold-500 font-bold uppercase tracking-wider text-xs mb-2">Interactive Tool</div>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white mb-4">Surface Finish & Sheen Visualizer</h2>
+                <p class="text-slate-400 text-sm sm:text-base">
+                    Select from premium Australian commercial paint swatches and sheen specifications to preview texture, sheen reflection, and substrate compatibility.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                
+                <!-- Room Preview Container -->
+                <div class="lg:col-span-7 glass-panel rounded-2xl p-4 sm:p-6 border border-white/10 relative">
+                    <div class="relative w-full h-[340px] sm:h-[420px] rounded-xl overflow-hidden bg-charcoal-800">
+                        <!-- Wall surface color layer -->
+                        <div id="visualizer-wall" class="absolute inset-0 transition-all duration-500 bg-[#EFECE4]"></div>
+                        
+                        <!-- Sheen effect overlay -->
+                        <div id="visualizer-sheen-overlay" class="absolute inset-0 pointer-events-none opacity-20 transition-opacity duration-300" style="background: linear-gradient(135deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 60%);"></div>
+
+                        <!-- Architectural room mockup SVG overlay lines -->
+                        <svg class="absolute inset-0 w-full h-full text-charcoal-900/30 stroke-current pointer-events-none" viewBox="0 0 800 600" fill="none">
+                            <path d="M0 480 L250 360 L550 360 L800 480 M250 360 L250 0 M550 360 L550 0" stroke-width="4" opacity="0.4"/>
+                            <rect x="330" y="120" width="140" height="180" rx="4" stroke="#ffffff" stroke-width="3" opacity="0.3" fill="rgba(0,0,0,0.15)"/>
+                        </svg>
+
+                        <!-- Selected Spec Overlay Tag -->
+                        <div class="absolute top-4 left-4 glass-panel px-3 py-2 rounded-lg text-xs font-mono border border-white/20">
+                            <div class="text-slate-400">Active Specification:</div>
+                            <div class="text-white font-bold" id="spec-display-name">Dulux Natural White™ (Low-Sheen Commercial)</div>
+                        </div>
+                    </div>
+
+                    <!-- Add Spec to Quote Button -->
+                    <div class="mt-4 flex justify-end">
+                        <button onclick="applySpecToQuote()" class="w-full sm:w-auto px-6 py-3 rounded-lg bg-gold-500 text-charcoal-900 font-bold hover:bg-gold-400 transition-all shadow-md flex items-center justify-center gap-2">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                            <span>Add Selected Spec to Quote Request</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Controls Container -->
+                <div class="lg:col-span-5 space-y-6">
+                    <!-- Color Swatches -->
+                    <div class="glass-panel p-6 rounded-2xl">
+                        <h3 class="text-white font-bold text-base mb-4 flex items-center justify-between">
+                            <span>1. Select Paint Color (Dulux®)</span>
+                            <span id="selected-color-hex" class="text-xs text-gold-400 font-mono">#EFECE4</span>
+                        </h3>
+                        <div class="grid grid-cols-3 gap-3">
+                            <button onclick="setVisualizerColor('#F4F5F3', 'Lexicon Quarter')" class="color-swatch-btn p-3 rounded-xl border border-white/10 hover:border-gold-500 transition-all text-left group" data-color="#F4F5F3">
+                                <div class="w-full h-10 rounded-lg mb-2 shadow-inner border border-black/10" style="background-color: #F4F5F3;"></div>
+                                <div class="text-xs font-bold text-white group-hover:text-gold-400">Lexicon Qtr</div>
+                                <div class="text-[10px] text-slate-400">Clean Crisp White</div>
+                            </button>
+                            <button onclick="setVisualizerColor('#EFECE4', 'Natural White')" class="color-swatch-btn p-3 rounded-xl border-2 border-gold-500 transition-all text-left group" data-color="#EFECE4">
+                                <div class="w-full h-10 rounded-lg mb-2 shadow-inner border border-black/10" style="background-color: #EFECE4;"></div>
+                                <div class="text-xs font-bold text-white group-hover:text-gold-400">Natural White</div>
+                                <div class="text-[10px] text-slate-400">Warm Architectural</div>
+                            </button>
+                            <button onclick="setVisualizerColor('#E5DEC9', 'Hog Bristle Quarter')" class="color-swatch-btn p-3 rounded-xl border border-white/10 hover:border-gold-500 transition-all text-left group" data-color="#E5DEC9">
+                                <div class="w-full h-10 rounded-lg mb-2 shadow-inner border border-black/10" style="background-color: #E5DEC9;"></div>
+                                <div class="text-xs font-bold text-white group-hover:text-gold-400">Hog Bristle</div>
+                                <div class="text-[10px] text-slate-400">Classic Neutral</div>
+                            </button>
+                            <button onclick="setVisualizerColor('#DCE0DC', 'Surfmist')" class="color-swatch-btn p-3 rounded-xl border border-white/10 hover:border-gold-500 transition-all text-left group" data-color="#DCE0DC">
+                                <div class="w-full h-10 rounded-lg mb-2 shadow-inner border border-black/10" style="background-color: #DCE0DC;"></div>
+                                <div class="text-xs font-bold text-white group-hover:text-gold-400">Surfmist</div>
+                                <div class="text-[10px] text-slate-400">Modern Off-Grey</div>
+                            </button>
+                            <button onclick="setVisualizerColor('#323639', 'Monument')" class="color-swatch-btn p-3 rounded-xl border border-white/10 hover:border-gold-500 transition-all text-left group" data-color="#323639">
+                                <div class="w-full h-10 rounded-lg mb-2 shadow-inner border border-black/10" style="background-color: #323639;"></div>
+                                <div class="text-xs font-bold text-white group-hover:text-gold-400">Monument</div>
+                                <div class="text-[10px] text-slate-400">Deep Charcoal</div>
+                            </button>
+                            <button onclick="setVisualizerColor('#26282A', 'Domino')" class="color-swatch-btn p-3 rounded-xl border border-white/10 hover:border-gold-500 transition-all text-left group" data-color="#26282A">
+                                <div class="w-full h-10 rounded-lg mb-2 shadow-inner border border-black/10" style="background-color: #26282A;"></div>
+                                <div class="text-xs font-bold text-white group-hover:text-gold-400">Domino</div>
+                                <div class="text-[10px] text-slate-400">Ultra Dark Accent</div>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Sheen Selectors -->
+                    <div class="glass-panel p-6 rounded-2xl">
+                        <h3 class="text-white font-bold text-base mb-4">2. Select Finish & Sheen Level</h3>
+                        <div class="space-y-2">
+                            <button onclick="setSheen('matte', 'Matte Architectural', 0.05)" class="sheen-btn w-full p-3 rounded-xl border border-white/10 hover:border-gold-500 text-left transition-all flex items-center justify-between" data-sheen="matte">
+                                <div>
+                                    <div class="text-sm font-bold text-white">Matte Architectural</div>
+                                    <div class="text-xs text-slate-400">Non-reflective, ideal for executive ceilings & high-end walls</div>
+                                </div>
+                                <span class="text-xs font-mono text-gold-400">2-5% Sheen</span>
+                            </button>
+                            <button onclick="setSheen('low-sheen', 'Low-Sheen Commercial', 0.2)" class="sheen-btn w-full p-3 rounded-xl border-2 border-gold-500 text-left transition-all flex items-center justify-between" data-sheen="low-sheen">
+                                <div>
+                                    <div class="text-sm font-bold text-white">Low-Sheen Commercial</div>
+                                    <div class="text-xs text-slate-400">Washable, scrub-resistant, standard for offices & retail</div>
+                                </div>
+                                <span class="text-xs font-mono text-gold-400">10-15% Sheen</span>
+                            </button>
+                            <button onclick="setSheen('satin', 'Satin Trim & Doors', 0.45)" class="sheen-btn w-full p-3 rounded-xl border border-white/10 hover:border-gold-500 text-left transition-all flex items-center justify-between" data-sheen="satin">
+                                <div>
+                                    <div class="text-sm font-bold text-white">Satin Polyurethane Trim</div>
+                                    <div class="text-xs text-slate-400">High durability for skirtings, architraves & timber doors</div>
+                                </div>
+                                <span class="text-xs font-mono text-gold-400">30-40% Sheen</span>
+                            </button>
+                            <button onclick="setSheen('epoxy', '2-Pack Epoxy Industrial', 0.75)" class="sheen-btn w-full p-3 rounded-xl border border-white/10 hover:border-gold-500 text-left transition-all flex items-center justify-between" data-sheen="epoxy">
+                                <div>
+                                    <div class="text-sm font-bold text-white">2-Pack Industrial Epoxy</div>
+                                    <div class="text-xs text-slate-400">Heavy duty gloss floor & wall anti-graffiti specification</div>
+                                </div>
+                                <span class="text-xs font-mono text-gold-400">80%+ High Gloss</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- PROJECT GALLERY SECTION -->
+    <section id="gallery" class="py-24 bg-charcoal-800/40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-10">
+                <div>
+                    <div class="text-gold-500 font-bold uppercase tracking-wider text-xs mb-2">Our Portfolio</div>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white">Featured Commercial & Luxury Projects</h2>
+                </div>
+                
+                <!-- UPLOAD MEDIA BUTTON (Admin Only) -->
+                <button id="admin-upload-btn" onclick="openMediaUploadModal()" class="admin-only hidden mt-4 md:mt-0 inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-gold-500 text-charcoal-900 font-extrabold hover:bg-gold-400 transition-all shadow-lg shadow-gold-500/20">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                    <span>+ Upload Media</span>
+                </button>
+            </div>
+
+            <!-- BEFORE & AFTER SLIDER INTERACTIVE DEMO -->
+            <div class="mb-12 glass-panel p-6 rounded-2xl border border-gold-500/20">
+                <h3 class="text-lg font-bold text-white mb-4 flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-gold-500"></span>
+                    Interactive Transformation Slider (Drag Left/Right)
+                </h3>
+                <div id="before-after-container" class="relative w-full h-[320px] sm:h-[460px] rounded-xl overflow-hidden select-none cursor-ew-resize">
+                    <!-- After Image -->
+                    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80" class="absolute inset-0 w-full h-full object-cover" alt="After Refurbishment">
+                    <div class="absolute top-4 right-4 bg-gold-500 text-charcoal-900 text-xs font-black px-3 py-1 rounded-md shadow-md">AFTER (ENSURE SPEC)</div>
+
+                    <!-- Before Image (Clipped overlay) -->
+                    <div id="before-image-wrapper" class="absolute inset-y-0 left-0 overflow-hidden w-1/2 border-r-2 border-gold-500">
+                        <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1200&q=80" class="absolute inset-0 w-full h-full object-cover filter grayscale brightness-75 max-w-none" id="before-img-inner" alt="Before Restoration">
+                        <div class="absolute top-4 left-4 bg-charcoal-900/90 text-white text-xs font-black px-3 py-1 rounded-md">BEFORE RESTORATION</div>
+                    </div>
+
+                    <!-- Slider Handle -->
+                    <div id="slider-handle" class="absolute top-0 bottom-0 left-1/2 w-8 -ml-4 flex items-center justify-center pointer-events-none">
+                        <div class="w-8 h-8 rounded-full bg-gold-500 text-charcoal-900 font-bold flex items-center justify-center shadow-2xl">
+                            &#8644;
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GALLERY CATEGORY FILTER TABS -->
+            <div class="flex flex-wrap items-center gap-2 mb-8 border-b border-white/10 pb-4" id="gallery-tabs">
+                <button onclick="filterGallery('all')" class="gallery-tab-btn active px-4 py-2 rounded-lg text-xs font-bold transition-all bg-gold-500 text-charcoal-900" data-category="all">
+                    All Projects
+                </button>
+                <button onclick="filterGallery('office')" class="gallery-tab-btn px-4 py-2 rounded-lg text-xs font-bold transition-all text-slate-300 hover:text-white hover:bg-charcoal-700" data-category="office">
+                    Commercial Offices
+                </button>
+                <button onclick="filterGallery('strata')" class="gallery-tab-btn px-4 py-2 rounded-lg text-xs font-bold transition-all text-slate-300 hover:text-white hover:bg-charcoal-700" data-category="strata">
+                    Strata & Exterior
+                </button>
+                <button onclick="filterGallery('retail')" class="gallery-tab-btn px-4 py-2 rounded-lg text-xs font-bold transition-all text-slate-300 hover:text-white hover:bg-charcoal-700" data-category="retail">
+                    Architectural & Retail
+                </button>
+                <button onclick="filterGallery('video')" class="gallery-tab-btn px-4 py-2 rounded-lg text-xs font-bold transition-all text-slate-300 hover:text-white hover:bg-charcoal-700 flex items-center gap-1.5" data-category="video">
+                    <svg class="w-3.5 h-3.5 text-gold-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
+                    Video Walkthroughs
+                </button>
+            </div>
+
+            <!-- Media Grid -->
+            <div id="gallery-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Dynamically rendered by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- COMMERCIAL QUOTE REQUEST SECTION -->
+    <section id="contact" class="py-24 bg-charcoal-900 relative">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="glass-panel p-8 sm:p-12 rounded-3xl border border-gold-500/30 relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-64 h-64 bg-gold-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+                <div class="text-center mb-10">
+                    <div class="text-gold-500 font-bold uppercase tracking-wider text-xs mb-2">Fast Turnaround Quotation</div>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white">Commercial Quote Request</h2>
+                    <p class="text-slate-400 text-sm mt-2">Submit project dimensions or specs for an itemized Tender Proposal within 24 hours.</p>
+                </div>
+
+                <form id="quote-form" onsubmit="handleQuoteSubmit(event)" class="space-y-6">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2">Contact Name *</label>
+                            <input type="text" required id="quote-name" class="w-full px-4 py-3 rounded-xl bg-charcoal-800 border border-white/10 text-white placeholder-slate-500 focus:outline-none focus:border-gold-500 transition-colors" placeholder="e.g. John Smith">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2">Company / Strata Plan *</label>
+                            <input type="text" required id="quote-company" class="w-full px-4 py-3 rounded-xl bg-charcoal-800 border border-white/10 text-white placeholder-slate-500 focus:outline-none focus:border-gold-500 transition-colors" placeholder="e.g. Lendlease / SP12345">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2">Email Address *</label>
+                            <input type="email" required id="quote-email" class="w-full px-4 py-3 rounded-xl bg-charcoal-800 border border-white/10 text-white placeholder-slate-500 focus:outline-none focus:border-gold-500 transition-colors" placeholder="john@company.com.au">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2">Phone Number *</label>
+                            <input type="tel" required id="quote-phone" class="w-full px-4 py-3 rounded-xl bg-charcoal-800 border border-white/10 text-white placeholder-slate-500 focus:outline-none focus:border-gold-500 transition-colors" placeholder="0400 000 000">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2">Sector Type</label>
+                            <select id="quote-sector" class="w-full px-4 py-3 rounded-xl bg-charcoal-800 border border-white/10 text-white focus:outline-none focus:border-gold-500 transition-colors">
+                                <option value="Commercial Office">Commercial Office</option>
+                                <option value="Strata & Residential Complex">Strata & Residential Complex</option>
+                                <option value="Industrial & Warehouse">Industrial & Warehouse</option>
+                                <option value="Retail & Hospitality">Retail & Hospitality</option>
+                                <option value="High-End Heritage & Architectural">High-End Heritage & Architectural</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2">Estimated Area / Spec</label>
+                            <input type="text" id="quote-spec" class="w-full px-4 py-3 rounded-xl bg-charcoal-800 border border-white/10 text-white placeholder-slate-500 focus:outline-none focus:border-gold-500 transition-colors" placeholder="e.g. 1,200 sqm (Dulux Low-Sheen)">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2">Project Scope & Details</label>
+                        <textarea id="quote-details" rows="4" class="w-full px-4 py-3 rounded-xl bg-charcoal-800 border border-white/10 text-white placeholder-slate-500 focus:outline-none focus:border-gold-500 transition-colors" placeholder="Describe surface conditions, timing constraints, and special access requirements..."></textarea>
+                    </div>
+
+                    <button type="submit" class="w-full py-4 rounded-xl bg-gold-500 text-charcoal-900 font-extrabold text-base hover:bg-gold-400 transition-all shadow-xl shadow-gold-500/20 transform hover:-translate-y-0.5 tracking-wider uppercase">
+                        SUBMIT DISPATCH QUOTE REQUEST
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="py-12 bg-charcoal-900 border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div id="footer-logo-container">
+                <!-- Dynamically updated footer logo -->
+            </div>
+            <div class="text-xs text-slate-500 text-center md:text-right">
+                <p id="copyright-trigger" class="cursor-pointer select-none hover:text-slate-400 transition-colors" title="Triple-click or 5-click trigger">
+                    &copy; 2026 ENSURE PAINTING & DECORATING PTY LTD. ALL RIGHTS RESERVED.
+                </p>
+                <p class="mt-1">Sydney Commercial License #39281C • Fully Insured ($20M)</p>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- ========================================== -->
+    <!-- MODAL 1: ADMIN LOGIN PIN MODAL -->
+    <!-- ========================================== -->
+    <div id="admin-pin-modal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
+        <div class="glass-panel w-full max-w-md rounded-2xl border border-gold-500/40 p-6 sm:p-8 relative shadow-2xl">
+            <div class="flex items-center justify-between border-b border-white/10 pb-4 mb-6">
+                <div class="flex items-center gap-2">
+                    <div class="p-2 rounded-lg bg-gold-500/20 text-gold-400">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-white">Owner Admin Login</h3>
+                        <p class="text-xs text-slate-400">Enter Security PIN to unlock management mode</p>
+                    </div>
+                </div>
+                <button onclick="closeAdminPinModal()" class="p-2 rounded-lg text-slate-400 hover:text-white">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+
+            <form onsubmit="handlePinSubmit(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">Security PIN Code</label>
+                    <input type="password" id="admin-pin-input" required class="w-full px-4 py-3 rounded-xl bg-charcoal-900 border border-gold-500/30 text-white text-center text-2xl tracking-[0.5em] font-mono focus:border-gold-500 focus:outline-none" placeholder="••••">
+                    <p id="pin-error-msg" class="text-xs text-red-400 mt-2 hidden">Incorrect PIN code. Please try again.</p>
+                    <p class="text-[11px] text-slate-500 mt-2">Default PIN is <code class="text-gold-400 font-mono">2026</code>. (Press Ctrl+Shift+E anytime to trigger).</p>
+                </div>
+
+                <div class="flex justify-end gap-3 pt-4 border-t border-white/10">
+                    <button type="button" onclick="closeAdminPinModal()" class="px-5 py-2.5 rounded-lg bg-charcoal-700 text-slate-300 text-xs font-bold hover:bg-charcoal-600">
+                        Cancel
+                    </button>
+                    <button type="submit" class="px-6 py-2.5 rounded-lg bg-gold-500 text-charcoal-900 text-xs font-extrabold hover:bg-gold-400 transition-all shadow-lg shadow-gold-500/20">
+                        Unlock Admin Mode
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- MODAL 2: CHANGE ADMIN PIN MODAL -->
+    <!-- ========================================== -->
+    <div id="change-pin-modal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
+        <div class="glass-panel w-full max-w-md rounded-2xl border border-gold-500/40 p-6 sm:p-8 relative shadow-2xl">
+            <div class="flex items-center justify-between border-b border-white/10 pb-4 mb-6">
+                <h3 class="text-xl font-bold text-white">Change Security PIN</h3>
+                <button onclick="closeChangePinModal()" class="p-2 rounded-lg text-slate-400 hover:text-white">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+
+            <form onsubmit="handleChangePinSubmit(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1">Current PIN</label>
+                    <input type="password" id="current-pin-input" required class="w-full px-4 py-2.5 rounded-xl bg-charcoal-900 border border-white/10 text-white font-mono text-center tracking-widest focus:border-gold-500 focus:outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1">New PIN</label>
+                    <input type="password" id="new-pin-input" required class="w-full px-4 py-2.5 rounded-xl bg-charcoal-900 border border-white/10 text-white font-mono text-center tracking-widest focus:border-gold-500 focus:outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1">Confirm New PIN</label>
+                    <input type="password" id="confirm-pin-input" required class="w-full px-4 py-2.5 rounded-xl bg-charcoal-900 border border-white/10 text-white font-mono text-center tracking-widest focus:border-gold-500 focus:outline-none">
+                </div>
+
+                <p id="change-pin-error" class="text-xs text-red-400 hidden"></p>
+
+                <div class="flex justify-end gap-3 pt-4 border-t border-white/10">
+                    <button type="button" onclick="closeChangePinModal()" class="px-5 py-2.5 rounded-lg bg-charcoal-700 text-slate-300 text-xs font-bold">
+                        Cancel
+                    </button>
+                    <button type="submit" class="px-6 py-2.5 rounded-lg bg-gold-500 text-charcoal-900 text-xs font-extrabold hover:bg-gold-400">
+                        Save New PIN
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- MODAL 3: LOGO CUSTOMIZER MODAL -->
+    <!-- ========================================== -->
+    <div id="logo-modal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-md flex items-center justify-center p-4 overflow-y-auto">
+        <div class="glass-panel w-full max-w-2xl rounded-2xl border border-gold-500/40 p-6 sm:p-8 relative shadow-2xl my-8">
+            <div class="flex items-center justify-between border-b border-white/10 pb-4 mb-6">
+                <div class="flex items-center gap-2">
+                    <div class="p-2 rounded-lg bg-gold-500/20 text-gold-400">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-white">Logo Customizer</h3>
+                        <p class="text-xs text-slate-400">Edit graphic emblem, upload logo image, and customize title text</p>
+                    </div>
+                </div>
+                <button onclick="closeLogoModal()" class="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/10">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+
+            <!-- LIVE PREVIEW PANEL -->
+            <div class="mb-6">
+                <label class="block text-xs font-bold uppercase tracking-wider text-gold-400 mb-2">Live Header Preview (Real-time)</label>
+                <div class="w-full h-24 rounded-xl bg-charcoal-900 border border-white/20 p-4 flex items-center justify-center overflow-hidden relative shadow-inner">
+                    <div id="modal-live-preview-container" class="flex items-center">
+                        <!-- Preview logo rendered live -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="space-y-6 max-h-[55vh] overflow-y-auto pr-2">
+                <!-- SECTION 1: EMBLEM & CUSTOM IMAGE -->
+                <div class="p-4 rounded-xl bg-charcoal-800/80 border border-white/5 space-y-4">
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-slate-300">1. Emblem & Custom Image</h4>
+                    
+                    <div>
+                        <label class="block text-xs text-slate-400 mb-1.5">Upload Custom Logo File (PNG / JPG / SVG)</label>
+                        <input type="file" id="modal-logo-file" accept="image/*" onchange="handleLogoFileUpload(event)" class="w-full text-xs text-slate-300 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-gold-500 file:text-charcoal-900 hover:file:bg-gold-400 cursor-pointer">
+                    </div>
+
+                    <div class="flex items-center justify-between pt-2">
+                        <label class="inline-flex items-center gap-2 text-xs text-slate-300 cursor-pointer">
+                            <input type="checkbox" id="modal-blend-black" onchange="onLogoControlChange()" class="w-4 h-4 rounded text-gold-500 focus:ring-gold-500 bg-charcoal-900 border-slate-600">
+                            <span>Blend Black Background (<code class="text-gold-400">mix-blend-mode: screen</code>)</span>
+                        </label>
+
+                        <button onclick="resetLogoImage()" class="px-3 py-1 text-xs rounded bg-white/10 hover:bg-white/20 text-slate-300 transition-colors">
+                            Reset Image to SVG Emblem
+                        </button>
+                    </div>
+                </div>
+
+                <!-- SECTION 2: DIMENSIONS & SPACING -->
+                <div class="p-4 rounded-xl bg-charcoal-800/80 border border-white/5 space-y-4">
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-slate-300">2. Dimensions & Spacing</h4>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <div class="flex justify-between text-xs mb-1">
+                                <span class="text-slate-400">Logo Height</span>
+                                <span id="val-height" class="font-mono text-gold-400">48px</span>
+                            </div>
+                            <input type="range" id="modal-logo-height" min="32" max="96" value="48" oninput="onLogoControlChange()" class="w-full accent-gold-500">
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between text-xs mb-1">
+                                <span class="text-slate-400">Gap (Logo to Text)</span>
+                                <span id="val-gap" class="font-mono text-gold-400">12px</span>
+                            </div>
+                            <input type="range" id="modal-logo-gap" min="0" max="28" value="12" oninput="onLogoControlChange()" class="w-full accent-gold-500">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECTION 3: TYPOGRAPHY EDITING -->
+                <div class="p-4 rounded-xl bg-charcoal-800/80 border border-white/5 space-y-4">
+                    <div class="flex items-center justify-between">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-300">3. Adjacent Typography Text</h4>
+                        <label class="inline-flex items-center gap-2 text-xs text-slate-300 cursor-pointer">
+                            <input type="checkbox" id="modal-show-text" checked onchange="onLogoControlChange()" class="w-4 h-4 rounded text-gold-500 focus:ring-gold-500 bg-charcoal-900 border-slate-600">
+                            <span>Show Text</span>
+                        </label>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs text-slate-400 mb-1">Main Title Text</label>
+                            <input type="text" id="modal-title-text" value="ENSURE" oninput="onLogoControlChange()" class="w-full px-3 py-2 rounded-lg bg-charcoal-900 border border-white/10 text-white text-sm focus:border-gold-500 focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs text-slate-400 mb-1">Subtitle Text</label>
+                            <input type="text" id="modal-subtitle-text" value="PAINTING & DECORATING" oninput="onLogoControlChange()" class="w-full px-3 py-2 rounded-lg bg-charcoal-900 border border-white/10 text-white text-sm focus:border-gold-500 focus:outline-none">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <div class="flex justify-between text-xs mb-1">
+                                <span class="text-slate-400">Title Font Size</span>
+                                <span id="val-font-size" class="font-mono text-gold-400">24px</span>
+                            </div>
+                            <input type="range" id="modal-font-size" min="16" max="38" value="24" oninput="onLogoControlChange()" class="w-full accent-gold-500">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs text-slate-400 mb-1">Main Text Color</label>
+                            <select id="modal-text-color" onchange="onLogoControlChange()" class="w-full px-3 py-2 rounded-lg bg-charcoal-900 border border-white/10 text-white text-sm focus:border-gold-500 focus:outline-none">
+                                <option value="#F2B705">Ensure Gold (#F2B705)</option>
+                                <option value="#FFFFFF">Crisp White (#FFFFFF)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal Action Buttons -->
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-3 border-t border-white/10 pt-4 mt-6">
+                <button onclick="resetAllLogoDefaults()" class="w-full sm:w-auto px-4 py-2 rounded-lg bg-red-500/10 text-red-400 border border-red-500/20 text-xs font-semibold hover:bg-red-500/20 transition-all">
+                    Reset All to Default
+                </button>
+                <div class="flex items-center gap-3 w-full sm:w-auto">
+                    <button onclick="closeLogoModal()" class="w-1/2 sm:w-auto px-5 py-2.5 rounded-lg bg-charcoal-700 text-slate-300 text-xs font-bold hover:bg-charcoal-600 transition-all">
+                        Cancel
+                    </button>
+                    <button onclick="saveAndApplyLogo()" class="w-1/2 sm:w-auto px-6 py-2.5 rounded-lg bg-gold-500 text-charcoal-900 text-xs font-extrabold hover:bg-gold-400 transition-all shadow-lg shadow-gold-500/20">
+                        Save & Apply
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- MODAL 4: MEDIA UPLOAD MODAL (ADMIN ONLY) -->
+    <!-- ========================================== -->
+    <div id="media-upload-modal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
+        <div class="glass-panel max-w-lg w-full p-6 sm:p-8 rounded-2xl border border-gold-500/40 shadow-2xl">
+            <div class="flex items-center justify-between border-b border-white/10 pb-4 mb-6">
+                <h3 class="text-xl font-bold text-white">Upload Gallery Photo / Video</h3>
+                <button onclick="closeMediaUploadModal()" class="p-2 rounded-lg text-slate-400 hover:text-white">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+
+            <form onsubmit="handleMediaUploadSubmit(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1">Project Title *</label>
+                    <input type="text" id="media-title" required placeholder="e.g. Executive Lounge Refurbishment" class="w-full px-4 py-2.5 rounded-xl bg-charcoal-900 border border-white/10 text-white text-sm focus:border-gold-500 focus:outline-none">
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1">Category *</label>
+                        <select id="media-category" class="w-full px-4 py-2.5 rounded-xl bg-charcoal-900 border border-white/10 text-white text-sm focus:border-gold-500 focus:outline-none">
+                            <option value="office">Commercial Office</option>
+                            <option value="strata">Strata & Exterior</option>
+                            <option value="retail">Architectural & Retail</option>
+                            <option value="video">Video Walkthrough</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1">Subhead / Location</label>
+                        <input type="text" id="media-subtitle" placeholder="e.g. Barangaroo Sydney" class="w-full px-4 py-2.5 rounded-xl bg-charcoal-900 border border-white/10 text-white text-sm focus:border-gold-500 focus:outline-none">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1">Media File Upload (Local File)</label>
+                    <input type="file" id="media-file-input" accept="image/*,video/*" onchange="handleMediaFileSelect(event)" class="w-full text-xs text-slate-300 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-gold-500 file:text-charcoal-900 hover:file:bg-gold-400 cursor-pointer mb-2">
+                    <p class="text-[11px] text-slate-400">OR paste external URL below:</p>
+                </div>
+
+                <div>
+                    <input type="url" id="media-url-input" placeholder="https://images.unsplash.com/... or mp4 link" class="w-full px-4 py-2.5 rounded-xl bg-charcoal-900 border border-white/10 text-white text-sm focus:border-gold-500 focus:outline-none">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1">Short Description</label>
+                    <textarea id="media-desc" rows="2" placeholder="Brief details regarding surface preparation or finish specifications..." class="w-full px-4 py-2 rounded-xl bg-charcoal-900 border border-white/10 text-white text-xs focus:border-gold-500 focus:outline-none"></textarea>
+                </div>
+
+                <div class="flex justify-end gap-3 pt-4 border-t border-white/10">
+                    <button type="button" onclick="closeMediaUploadModal()" class="px-5 py-2.5 rounded-lg bg-charcoal-700 text-slate-300 text-xs font-bold">
+                        Cancel
+                    </button>
+                    <button type="submit" class="px-6 py-2.5 rounded-lg bg-gold-500 text-charcoal-900 text-xs font-extrabold hover:bg-gold-400 shadow-md">
+                        Add to Gallery
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <!-- LIGHTBOX MODAL FOR GALLERY PHOTOS & VIDEOS -->
+    <div id="lightbox-modal" class="fixed inset-0 z-50 hidden bg-black/95 backdrop-blur-lg flex items-center justify-center p-4">
+        <button onclick="closeLightbox()" class="absolute top-6 right-6 p-3 text-white hover:text-gold-500 text-xl font-bold z-10 flex items-center gap-1">
+            <span>&times;</span> Close
+        </button>
+        <div id="lightbox-content-container" class="max-w-4xl max-h-[90vh] w-full flex items-center justify-center">
+            <!-- Dynamically populated with img or video -->
+        </div>
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- JAVASCRIPT LOGIC -->
+    <!-- ========================================== -->
+    <script>
+        // ==========================================
+        // ADMIN & PIN SECURITY SYSTEM
+        // ==========================================
+        let isAdminLoggedIn = false;
+        let copyrightClickCount = 0;
+        let copyrightClickTimer = null;
+
+        function getStoredPin() {
+            return localStorage.getItem('ensure_admin_pin') || '2026';
+        }
+
+        function checkAdminSession() {
+            const auth = sessionStorage.getItem('ensure_admin_auth');
+            if (auth === 'true') {
+                setAdminState(true);
+            } else {
+                setAdminState(false);
+            }
+        }
+
+        function setAdminState(loggedIn) {
+            isAdminLoggedIn = loggedIn;
+            sessionStorage.setItem('ensure_admin_auth', loggedIn ? 'true' : 'false');
+            
+            const adminBar = document.getElementById('admin-bar');
+            const mainHeader = document.getElementById('main-header');
+            
+            if (loggedIn) {
+                adminBar.classList.remove('hidden');
+                mainHeader.style.top = '36px'; // Shift header down when admin bar is present
+                document.querySelectorAll('.admin-only').forEach(el => el.classList.remove('hidden'));
+            } else {
+                adminBar.classList.add('hidden');
+                mainHeader.style.top = '0px';
+                document.querySelectorAll('.admin-only').forEach(el => el.classList.add('hidden'));
+            }
+            renderGallery(); // Re-render gallery to show/hide delete buttons
+        }
+
+        // 5-Click Trigger on Copyright Text
+        function initCopyrightTrigger() {
+            const trigger = document.getElementById('copyright-trigger');
+            if (!trigger) return;
+
+            trigger.addEventListener('click', () => {
+                copyrightClickCount++;
+                if (copyrightClickCount === 1) {
+                    copyrightClickTimer = setTimeout(() => {
+                        copyrightClickCount = 0;
+                    }, 3000);
+                }
+                if (copyrightClickCount >= 5) {
+                    clearTimeout(copyrightClickTimer);
+                    copyrightClickCount = 0;
+                    openAdminPinModal();
+                }
+            });
+        }
+
+        // Keyboard Shortcut Trigger (Ctrl+Shift+E or Cmd+Shift+E)
+        window.addEventListener('keydown', (e) => {
+            if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'E' || e.key === 'e')) {
+                e.preventDefault();
+                if (isAdminLoggedIn) {
+                    showToast('Admin Mode is already active!');
+                } else {
+                    openAdminPinModal();
+                }
+            }
+        });
+
+        function openAdminPinModal() {
+            document.getElementById('admin-pin-input').value = '';
+            document.getElementById('pin-error-msg').classList.add('hidden');
+            document.getElementById('admin-pin-modal').classList.remove('hidden');
+            setTimeout(() => document.getElementById('admin-pin-input').focus(), 100);
+        }
+
+        function closeAdminPinModal() {
+            document.getElementById('admin-pin-modal').classList.add('hidden');
+        }
+
+        function handlePinSubmit(e) {
+            e.preventDefault();
+            const inputPin = document.getElementById('admin-pin-input').value.trim();
+            const correctPin = getStoredPin();
+
+            if (inputPin === correctPin) {
+                setAdminState(true);
+                closeAdminPinModal();
+                showToast('Admin Mode Unlocked successfully!');
+            } else {
+                document.getElementById('pin-error-msg').classList.remove('hidden');
+            }
+        }
+
+        function logoutAdmin() {
+            setAdminState(false);
+            showToast('Admin Mode Locked.');
+        }
+
+        // Change PIN Modal Functions
+        function openChangePinModal() {
+            document.getElementById('current-pin-input').value = '';
+            document.getElementById('new-pin-input').value = '';
+            document.getElementById('confirm-pin-input').value = '';
+            document.getElementById('change-pin-error').classList.add('hidden');
+            document.getElementById('change-pin-modal').classList.remove('hidden');
+        }
+
+        function closeChangePinModal() {
+            document.getElementById('change-pin-modal').classList.add('hidden');
+        }
+
+        function handleChangePinSubmit(e) {
+            e.preventDefault();
+            const current = document.getElementById('current-pin-input').value.trim();
+            const newPin = document.getElementById('new-pin-input').value.trim();
+            const confirmPin = document.getElementById('confirm-pin-input').value.trim();
+            const errEl = document.getElementById('change-pin-error');
+
+            if (current !== getStoredPin()) {
+                errEl.innerText = 'Current PIN is incorrect.';
+                errEl.classList.remove('hidden');
+                return;
+            }
+            if (newPin.length < 4) {
+                errEl.innerText = 'New PIN must be at least 4 digits.';
+                errEl.classList.remove('hidden');
+                return;
+            }
+            if (newPin !== confirmPin) {
+                errEl.innerText = 'New PINs do not match.';
+                errEl.classList.remove('hidden');
+                return;
+            }
+
+            localStorage.setItem('ensure_admin_pin', newPin);
+            closeChangePinModal();
+            showToast('PIN successfully updated!');
+        }
+
+        // ==========================================
+        // DYNAMIC LOGO STATE & MANAGEMENT
+        // ==========================================
+        const DEFAULT_LOGO_STATE = {
+            imageSrc: null, // null = use standard geometric SVG logo
+            blendBlack: false,
+            logoHeight: 48,
+            logoGap: 12,
+            titleText: 'ENSURE',
+            subtitleText: 'PAINTING & DECORATING',
+            titleFontSize: 24,
+            titleColor: '#F2B705',
+            showText: true
+        };
+
+        let currentLogoState = { ...DEFAULT_LOGO_STATE };
+
+        function loadLogoState() {
+            try {
+                const saved = localStorage.getItem('ensure_custom_logo_v2');
+                if (saved) {
+                    currentLogoState = Object.assign({}, DEFAULT_LOGO_STATE, JSON.parse(saved));
+                }
+            } catch (e) {
+                console.warn('Could not parse logo state', e);
+            }
+        }
+
+        function renderLogoHTML(state) {
+            const height = state.logoHeight || 48;
+            const gap = state.logoGap !== undefined ? state.logoGap : 12;
+            const title = state.titleText || 'ENSURE';
+            const subtitle = state.subtitleText || 'PAINTING & DECORATING';
+            const fontSize = state.titleFontSize || 24;
+            const color = state.titleColor || '#F2B705';
+            const showText = state.showText !== false;
+            const blendClass = state.blendBlack ? 'blend-screen' : '';
+
+            let graphicMarkup = '';
+            if (state.imageSrc) {
+                graphicMarkup = `<img src="${state.imageSrc}" alt="ENSURE Logo" class="${blendClass} object-contain transition-all" style="height:${height}px;">`;
+            } else {
+                // Architectural Gold Geometric Broken Square Emblem SVG
+                graphicMarkup = `
+                    <svg viewBox="0 0 100 100" class="transition-all shrink-0" style="height:${height}px; width:auto;">
+                        <defs>
+                            <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#F5C842"/>
+                                <stop offset="50%" stop-color="#F2B705"/>
+                                <stop offset="100%" stop-color="#B37D03"/>
+                            </linearGradient>
+                        </defs>
+                        <!-- Top Left Frame Segment -->
+                        <polygon points="10,10 90,10 90,24 24,24 24,90 10,90" fill="url(#goldGrad)" />
+                        <!-- Bottom Right Frame Segment -->
+                        <polygon points="90,90 10,90 10,76 76,76 76,10 90,10" fill="url(#goldGrad)" opacity="0.85" />
+                        <!-- Central Solid Bold 'E' -->
+                        <path d="M35 34 H68 V44 H47 V49 H64 V58 H47 V64 H68 V74 H35 Z" fill="url(#goldGrad)" />
+                    </svg>
+                `;
+            }
+
+            let textMarkup = '';
+            if (showText) {
+                textMarkup = `
+                    <div class="flex flex-col justify-center leading-none select-none">
+                        <span style="font-size:${fontSize}px; color:${color};" class="font-black tracking-wider uppercase font-sans drop-shadow-sm">
+                            ${title}
+                        </span>
+                        <span class="text-[9px] sm:text-[10px] text-slate-300 tracking-[0.25em] font-semibold uppercase mt-1">
+                            ${subtitle}
+                        </span>
+                    </div>
+                `;
+            }
+
+            return `
+                <div class="flex items-center" style="gap:${gap}px;">
+                    ${graphicMarkup}
+                    ${textMarkup}
+                </div>
+            `;
+        }
+
+        function renderGlobalLogos() {
+            const html = renderLogoHTML(currentLogoState);
+            const headerContainer = document.getElementById('header-logo-container');
+            const footerContainer = document.getElementById('footer-logo-container');
+            if (headerContainer) headerContainer.innerHTML = html;
+            if (footerContainer) footerContainer.innerHTML = html;
+        }
+
+        function updateModalPreview(state) {
+            const previewContainer = document.getElementById('modal-live-preview-container');
+            if (previewContainer) {
+                previewContainer.innerHTML = renderLogoHTML(state);
+            }
+            document.getElementById('val-height').innerText = `${state.logoHeight}px`;
+            document.getElementById('val-gap').innerText = `${state.logoGap}px`;
+            document.getElementById('val-font-size').innerText = `${state.titleFontSize}px`;
+        }
+
+        function getModalControlState() {
+            return {
+                imageSrc: currentLogoState.imageSrc,
+                blendBlack: document.getElementById('modal-blend-black').checked,
+                logoHeight: parseInt(document.getElementById('modal-logo-height').value, 10),
+                logoGap: parseInt(document.getElementById('modal-logo-gap').value, 10),
+                titleText: document.getElementById('modal-title-text').value,
+                subtitleText: document.getElementById('modal-subtitle-text').value,
+                titleFontSize: parseInt(document.getElementById('modal-font-size').value, 10),
+                titleColor: document.getElementById('modal-text-color').value,
+                showText: document.getElementById('modal-show-text').checked
+            };
+        }
+
+        function onLogoControlChange() {
+            const tempState = getModalControlState();
+            updateModalPreview(tempState);
+        }
+
+        function handleLogoFileUpload(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    currentLogoState.imageSrc = e.target.result;
+                    onLogoControlChange();
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function resetLogoImage() {
+            currentLogoState.imageSrc = null;
+            document.getElementById('modal-logo-file').value = '';
+            onLogoControlChange();
+        }
+
+        function openLogoModal() {
+            document.getElementById('modal-blend-black').checked = !!currentLogoState.blendBlack;
+            document.getElementById('modal-logo-height').value = currentLogoState.logoHeight || 48;
+            document.getElementById('modal-logo-gap').value = currentLogoState.logoGap !== undefined ? currentLogoState.logoGap : 12;
+            document.getElementById('modal-title-text').value = currentLogoState.titleText || 'ENSURE';
+            document.getElementById('modal-subtitle-text').value = currentLogoState.subtitleText || 'PAINTING & DECORATING';
+            document.getElementById('modal-font-size').value = currentLogoState.titleFontSize || 24;
+            document.getElementById('modal-text-color').value = currentLogoState.titleColor || '#F2B705';
+            document.getElementById('modal-show-text').checked = currentLogoState.showText !== false;
+
+            updateModalPreview(currentLogoState);
+            document.getElementById('logo-modal').classList.remove('hidden');
+        }
+
+        function closeLogoModal() {
+            document.getElementById('logo-modal').classList.add('hidden');
+        }
+
+        function saveAndApplyLogo() {
+            currentLogoState = getModalControlState();
+            try {
+                localStorage.setItem('ensure_custom_logo_v2', JSON.stringify(currentLogoState));
+            } catch(e) {}
+            renderGlobalLogos();
+            closeLogoModal();
+            showToast('Logo preferences saved!');
+        }
+
+        function resetAllLogoDefaults() {
+            currentLogoState = { ...DEFAULT_LOGO_STATE };
+            try {
+                localStorage.removeItem('ensure_custom_logo_v2');
+            } catch(e) {}
+            document.getElementById('modal-logo-file').value = '';
+            openLogoModal();
+        }
+
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const openIcon = document.getElementById('menu-icon-open');
+            const closeIcon = document.getElementById('menu-icon-close');
+            menu.classList.toggle('hidden');
+            openIcon.classList.toggle('hidden');
+            closeIcon.classList.toggle('hidden');
+        }
+
+        // ==========================================
+        // HERO CANVAS BRUSH SHEEN ANIMATION
+        // ==========================================
+        function initHeroCanvas() {
+            const canvas = document.getElementById('paintCanvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            let width, height;
+            let mouse = { x: -1000, y: -1000 };
+
+            function resize() {
+                width = canvas.width = window.innerWidth;
+                height = canvas.height = window.innerHeight;
+            }
+            window.addEventListener('resize', resize);
+            resize();
+
+            window.addEventListener('mousemove', (e) => {
+                const rect = canvas.getBoundingClientRect();
+                mouse.x = e.clientX - rect.left;
+                mouse.y = e.clientY - rect.top;
+            });
+
+            const particles = Array.from({ length: 45 }, () => ({
+                x: Math.random() * width,
+                y: Math.random() * height,
+                radius: Math.random() * 80 + 40,
+                vx: (Math.random() - 0.5) * 0.4,
+                vy: (Math.random() - 0.5) * 0.4,
+                alpha: Math.random() * 0.12 + 0.03
+            }));
+
+            function animate() {
+                ctx.clearRect(0, 0, width, height);
+
+                particles.forEach(p => {
+                    p.x += p.vx;
+                    p.y += p.vy;
+
+                    if (p.x < -100) p.x = width + 100;
+                    if (p.x > width + 100) p.x = -100;
+                    if (p.y < -100) p.y = height + 100;
+                    if (p.y > height + 100) p.y = -100;
+
+                    const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.radius);
+                    grad.addColorStop(0, `rgba(242, 183, 5, ${p.alpha})`);
+                    grad.addColorStop(1, 'rgba(13, 14, 16, 0)');
+
+                    ctx.fillStyle = grad;
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                    ctx.fill();
+                });
+
+                if (mouse.x > 0 && mouse.y > 0) {
+                    const mouseGrad = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, 260);
+                    mouseGrad.addColorStop(0, 'rgba(242, 183, 5, 0.14)');
+                    mouseGrad.addColorStop(1, 'rgba(13, 14, 16, 0)');
+                    ctx.fillStyle = mouseGrad;
+                    ctx.beginPath();
+                    ctx.arc(mouse.x, mouse.y, 260, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+
+                requestAnimationFrame(animate);
+            }
+            animate();
+        }
+
+        // ==========================================
+        // SURFACE VISUALIZER INTERACTIVE CONTROLS
+        // ==========================================
+        let currentVisualizerState = {
+            color: '#EFECE4',
+            colorName: 'Natural White',
+            sheenName: 'Low-Sheen Commercial',
+            opacity: 0.2
+        };
+
+        function setVisualizerColor(hex, name) {
+            currentVisualizerState.color = hex;
+            currentVisualizerState.colorName = name;
+            document.getElementById('visualizer-wall').style.backgroundColor = hex;
+            document.getElementById('selected-color-hex').innerText = hex;
+            updateSpecDisplayText();
+
+            document.querySelectorAll('.color-swatch-btn').forEach(btn => {
+                if (btn.getAttribute('data-color') === hex) {
+                    btn.classList.add('border-2', 'border-gold-500');
+                    btn.classList.remove('border-white/10');
+                } else {
+                    btn.classList.remove('border-2', 'border-gold-500');
+                    btn.classList.add('border-white/10');
+                }
+            });
+        }
+
+        function setSheen(sheenKey, name, opacity) {
+            currentVisualizerState.sheenName = name;
+            currentVisualizerState.opacity = opacity;
+            document.getElementById('visualizer-sheen-overlay').style.opacity = opacity;
+            updateSpecDisplayText();
+
+            document.querySelectorAll('.sheen-btn').forEach(btn => {
+                if (btn.getAttribute('data-sheen') === sheenKey) {
+                    btn.classList.add('border-2', 'border-gold-500');
+                    btn.classList.remove('border-white/10');
+                } else {
+                    btn.classList.remove('border-2', 'border-gold-500');
+                    btn.classList.add('border-white/10');
+                }
+            });
+        }
+
+        function updateSpecDisplayText() {
+            document.getElementById('spec-display-name').innerText = `Dulux ${currentVisualizerState.colorName} (${currentVisualizerState.sheenName})`;
+        }
+
+        function applySpecToQuote() {
+            const specString = `Dulux ${currentVisualizerState.colorName} (${currentVisualizerState.sheenName} - Hex ${currentVisualizerState.color})`;
+            document.getElementById('quote-spec').value = specString;
+            document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+            showToast('Specification pre-filled into Quote Form below!');
+        }
+
+        // ==========================================
+        // BEFORE & AFTER SLIDER LOGIC
+        // ==========================================
+        function initBeforeAfterSlider() {
+            const container = document.getElementById('before-after-container');
+            const wrapper = document.getElementById('before-image-wrapper');
+            const handle = document.getElementById('slider-handle');
+            const innerImg = document.getElementById('before-img-inner');
+            if (!container || !wrapper || !handle) return;
+
+            let isDragging = false;
+
+            function updateSlider(x) {
+                const rect = container.getBoundingClientRect();
+                let position = x - rect.left;
+                if (position < 0) position = 0;
+                if (position > rect.width) position = rect.width;
+                const percentage = (position / rect.width) * 100;
+                
+                wrapper.style.width = `${percentage}%`;
+                handle.style.left = `${percentage}%`;
+                innerImg.style.width = `${rect.width}px`;
+            }
+
+            function syncInnerWidth() {
+                const rect = container.getBoundingClientRect();
+                innerImg.style.width = `${rect.width}px`;
+            }
+            window.addEventListener('resize', syncInnerWidth);
+            syncInnerWidth();
+
+            container.addEventListener('mousedown', (e) => { isDragging = true; updateSlider(e.clientX); });
+            window.addEventListener('mousemove', (e) => { if (isDragging) updateSlider(e.clientX); });
+            window.addEventListener('mouseup', () => { isDragging = false; });
+
+            container.addEventListener('touchstart', (e) => { isDragging = true; updateSlider(e.touches[0].clientX); });
+            window.addEventListener('touchmove', (e) => { if (isDragging) updateSlider(e.touches[0].clientX); });
+            window.addEventListener('touchend', () => { isDragging = false; });
+        }
+
+        // ==========================================
+        // GALLERY ITEMS & MEDIA MANAGEMENT
+        // ==========================================
+        const DEFAULT_GALLERY_ITEMS = [
+            {
+                id: 'default-1',
+                title: '24-Story Interior Commercial Repaint',
+                subtitle: 'Commercial Office • Martin Place Sydney',
+                category: 'office',
+                type: 'image',
+                url: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80',
+                description: 'Night shift execution with zero disturbance to active financial tenants.'
+            },
+            {
+                id: 'default-2',
+                title: 'Luxury Waterfront Facade Membrane',
+                subtitle: 'Strata Complex • Neutral Bay',
+                category: 'strata',
+                type: 'image',
+                url: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=80',
+                description: 'Dulux Acratex weather-shield anti-carbonation protective coating.'
+            },
+            {
+                id: 'default-3',
+                title: 'High-Gloss Epoxy & Decorative Finishes',
+                subtitle: 'Flagship Retail • Pitt St Mall',
+                category: 'retail',
+                type: 'image',
+                url: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1200&q=80',
+                description: 'Architectural metallic spray application and custom wall plaster.'
+            },
+            {
+                id: 'default-4',
+                title: 'Commercial Foyer Paint Finish Reel',
+                subtitle: 'Video Walkthrough • Barangaroo Precinct',
+                category: 'video',
+                type: 'video',
+                url: 'https://assets.mixkit.co/videos/preview/mixkit-modern-apartment-interior-design-41559-large.mp4',
+                description: 'Complete video walk-through showing smooth low-sheen level 5 finish.'
+            }
+        ];
+
+        let activeCategoryFilter = 'all';
+        let uploadedFileBase64 = null;
+
+        function getGalleryItems() {
+            try {
+                const stored = localStorage.getItem('ensure_gallery_items_v1');
+                if (stored) {
+                    const customItems = JSON.parse(stored);
+                    return [...customItems, ...DEFAULT_GALLERY_ITEMS];
+                }
+            } catch (e) {}
+            return DEFAULT_GALLERY_ITEMS;
+        }
+
+        function filterGallery(category) {
+            activeCategoryFilter = category;
+            
+            document.querySelectorAll('.gallery-tab-btn').forEach(btn => {
+                if (btn.getAttribute('data-category') === category) {
+                    btn.classList.add('bg-gold-500', 'text-charcoal-900');
+                    btn.classList.remove('text-slate-300');
+                } else {
+                    btn.classList.remove('bg-gold-500', 'text-charcoal-900');
+                    btn.classList.add('text-slate-300');
+                }
+            });
+
+            renderGallery();
+        }
+
+        function renderGallery() {
+            const grid = document.getElementById('gallery-grid');
+            if (!grid) return;
+
+            const items = getGalleryItems();
+            const filtered = activeCategoryFilter === 'all' 
+                ? items 
+                : items.filter(item => item.category === activeCategoryFilter);
+
+            if (filtered.length === 0) {
+                grid.innerHTML = `<div class="col-span-full text-center py-12 text-slate-400 text-sm">No project media found in this category.</div>`;
+                return;
+            }
+
+            grid.innerHTML = filtered.map(item => {
+                const isVideo = item.type === 'video' || (item.url && item.url.match(/\.(mp4|webm|mov)$/i));
+                
+                const deleteBtnMarkup = isAdminLoggedIn ? `
+                    <button onclick="deleteGalleryItem('${item.id}')" class="absolute top-3 right-3 z-20 p-2 rounded-lg bg-red-600/90 text-white hover:bg-red-700 shadow-md transition-all" title="Delete Media">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                    </button>
+                ` : '';
+
+                const mediaPreview = isVideo ? `
+                    <div class="relative h-60 overflow-hidden bg-charcoal-950 flex items-center justify-center">
+                        <video src="${item.url}" class="w-full h-full object-cover" muted loop></video>
+                        <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
+                            <div class="w-12 h-12 rounded-full bg-gold-500 text-charcoal-900 flex items-center justify-center shadow-lg transform group-hover:scale-110 transition-transform">
+                                &#9654;
+                            </div>
+                        </div>
+                    </div>
+                ` : `
+                    <div class="relative h-60 overflow-hidden">
+                        <img src="${item.url}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" onerror="this.src='https://placehold.co/800x600/141619/F2B705?text=Project+Media'">
+                        <div class="absolute inset-0 bg-gradient-to-t from-charcoal-900 via-transparent to-transparent opacity-80"></div>
+                    </div>
+                `;
+
+                return `
+                    <div class="glass-card rounded-xl overflow-hidden group relative">
+                        ${deleteBtnMarkup}
+                        <div onclick="openLightboxMedia('${item.url}', '${isVideo ? 'video' : 'image'}')" class="cursor-pointer">
+                            ${mediaPreview}
+                            <div class="p-5">
+                                <span class="text-xs text-gold-400 font-mono font-semibold uppercase">${item.subtitle || 'ENSURE Project'}</span>
+                                <h4 class="text-lg font-bold text-white mt-1">${item.title}</h4>
+                                <p class="text-xs text-slate-400 mt-2">${item.description || ''}</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function deleteGalleryItem(id) {
+            if (!confirm('Are you sure you want to remove this project media?')) return;
+            try {
+                const stored = localStorage.getItem('ensure_gallery_items_v1');
+                if (stored) {
+                    let customItems = JSON.parse(stored);
+                    customItems = customItems.filter(item => item.id !== id);
+                    localStorage.setItem('ensure_gallery_items_v1', JSON.stringify(customItems));
+                }
+            } catch (e) {}
+            renderGallery();
+            showToast('Project media deleted.');
+        }
+
+        // Media Upload Modal
+        function openMediaUploadModal() {
+            uploadedFileBase64 = null;
+            document.getElementById('media-title').value = '';
+            document.getElementById('media-subtitle').value = '';
+            document.getElementById('media-url-input').value = '';
+            document.getElementById('media-desc').value = '';
+            document.getElementById('media-file-input').value = '';
+            document.getElementById('media-upload-modal').classList.remove('hidden');
+        }
+
+        function closeMediaUploadModal() {
+            document.getElementById('media-upload-modal').classList.add('hidden');
+        }
+
+        function handleMediaFileSelect(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    uploadedFileBase64 = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function handleMediaUploadSubmit(e) {
+            e.preventDefault();
+            const title = document.getElementById('media-title').value.trim();
+            const category = document.getElementById('media-category').value;
+            const subtitle = document.getElementById('media-subtitle').value.trim();
+            const urlInput = document.getElementById('media-url-input').value.trim();
+            const desc = document.getElementById('media-desc').value.trim();
+
+            const finalUrl = uploadedFileBase64 || urlInput;
+
+            if (!finalUrl) {
+                alert('Please upload a file or paste a valid media URL.');
+                return;
+            }
+
+            const isVideo = category === 'video' || (finalUrl.startsWith('data:video') || finalUrl.match(/\.(mp4|webm|mov)$/i));
+
+            const newItem = {
+                id: 'custom-' + Date.now(),
+                title: title,
+                subtitle: subtitle || 'Custom Upload',
+                category: category,
+                type: isVideo ? 'video' : 'image',
+                url: finalUrl,
+                description: desc
+            };
+
+            try {
+                const stored = localStorage.getItem('ensure_gallery_items_v1');
+                const customItems = stored ? JSON.parse(stored) : [];
+                customItems.unshift(newItem);
+                localStorage.setItem('ensure_gallery_items_v1', JSON.stringify(customItems));
+            } catch (e) {
+                console.error('Storage error', e);
+            }
+
+            closeMediaUploadModal();
+            renderGallery();
+            showToast('New project media added to Gallery!');
+        }
+
+        // ==========================================
+        // LIGHTBOX VIEWER
+        // ==========================================
+        function openLightboxMedia(url, type) {
+            const container = document.getElementById('lightbox-content-container');
+            if (type === 'video' || url.match(/\.(mp4|webm|mov)$/i)) {
+                container.innerHTML = `
+                    <video src="${url}" controls autoplay class="max-w-full max-h-[85vh] rounded-xl border border-gold-500/40 shadow-2xl"></video>
+                `;
+            } else {
+                container.innerHTML = `
+                    <img src="${url}" class="max-w-full max-h-[85vh] object-contain rounded-xl border border-gold-500/40 shadow-2xl">
+                `;
+            }
+            document.getElementById('lightbox-modal').classList.remove('hidden');
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox-modal').classList.add('hidden');
+            document.getElementById('lightbox-content-container').innerHTML = '';
+        }
+
+        // ==========================================
+        // FORM SUBMISSION & DISPATCH
+        // ==========================================
+        function handleQuoteSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('quote-name').value;
+            const company = document.getElementById('quote-company').value;
+            const email = document.getElementById('quote-email').value;
+            const phone = document.getElementById('quote-phone').value;
+            const sector = document.getElementById('quote-sector').value;
+            const spec = document.getElementById('quote-spec').value;
+            const details = document.getElementById('quote-details').value;
+
+            const subject = encodeURIComponent(`ENSURE Commercial Quote Request: ${company} (${name})`);
+            const body = encodeURIComponent(
+                `Contact Name: ${name}\n` +
+                `Company / Strata: ${company}\n` +
+                `Email: ${email}\n` +
+                `Phone: ${phone}\n` +
+                `Sector: ${sector}\n` +
+                `Spec / Area: ${spec}\n\n` +
+                `Project Details:\n${details}`
+            );
+
+            window.location.href = `mailto:info@ensurepainting.com.au?subject=${subject}&body=${body}`;
+            showToast('Dispatch mail client loaded! Estimation team notified.');
+        }
+
+        // Toast Notification System
+        function showToast(msg) {
+            const toast = document.createElement('div');
+            toast.className = 'fixed bottom-6 right-6 z-50 glass-panel border border-gold-500 px-6 py-4 rounded-xl text-gold-400 text-sm font-bold shadow-2xl flex items-center gap-3 transition-all transform translate-y-4 opacity-0';
+            toast.innerHTML = `
+                <svg class="w-5 h-5 text-gold-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                <span>${msg}</span>
+            `;
+            document.body.appendChild(toast);
+            setTimeout(() => {
+                toast.classList.remove('translate-y-4', 'opacity-0');
+            }, 50);
+            setTimeout(() => {
+                toast.classList.add('translate-y-4', 'opacity-0');
+                setTimeout(() => toast.remove(), 300);
+            }, 4000);
+        }
+
+        // INITIALIZATION
+        window.onload = function() {
+            loadLogoState();
+            renderGlobalLogos();
+            checkAdminSession();
+            initCopyrightTrigger();
+            initHeroCanvas();
+            initBeforeAfterSlider();
+            renderGallery();
+        };
+    </script>
+</body>
+</html>
